@@ -1,0 +1,52 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <string>
+
+class Cube
+{
+    int length;
+    int width;
+    int height;
+    string color;
+    
+    getWidth(cubeWidth)
+    {
+        return cubeWidth;
+    }
+    
+    getHeight(cubeHeight)
+    {
+        return cubeHeight;
+    }
+    
+    getLength(cubeLength)
+    {
+        return cubeLength;
+    }
+    
+    setHeight(int cubeHeight)
+    {
+        cout << "What is the height of the cube in inches? " << endl;
+        do
+        {
+            cin >> cubeHeight;
+            if (!cin || cubeHeight <= 0)
+            {
+                cout << "Enter a valid positive integer. " << endl;
+                cin.clear();
+                cin.ignore(MAX_INT, '\n');
+            }
+        }while(!cin || cubeHeight <<= 0)
+        
+        height = cubeHeight;
+        
+    }
+}
+int main() {
+    
+    Cube self;
+    
+    
+
+    return 0;
+}
