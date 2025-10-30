@@ -30,6 +30,11 @@ class Cube
     {
         return length;
     }
+
+    int getVolume()
+    {
+        return volume;
+    }
     
     void setHeight()
     {
@@ -65,7 +70,7 @@ class Cube
             }
         }while(cubeLength <= 0);
         
-        height = cubeLength;
+        length = cubeLength;
         
     }
 
@@ -84,7 +89,7 @@ class Cube
             }
         }while(cubeWidth <= 0);
         
-        height = cubeWidth;
+        width = cubeWidth;
         
     }
 
@@ -92,6 +97,8 @@ class Cube
     {
         volume = length * width * height;
     }
+
+
 };
 
 int main() {
@@ -102,6 +109,16 @@ int main() {
 
     
     self.setHeight();
+    self.setLength();
+    self.setWidth();
+    self.calculateVolume();
+
+    cout << "Cube Properties: " << endl;
+    cout << "Height: " << self.getHeight() << " in." << endl;
+    cout << "Length: " << self.getLength() << " in." << endl;
+    cout << "Width: " << self.getWidth() << " in." << endl;
+    cout << "Volume: " << self.getVolume() << " inches cubed." <<endl;
+
     
     
     
