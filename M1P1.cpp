@@ -140,6 +140,8 @@ class Cube
         volume = length * width * height;
     }
 
+    
+
 
 };
 
@@ -164,9 +166,74 @@ int main() {
     cout << "Volume: " << self.getVolume() << " inches cubed." <<endl;
     cout << "Color: " << self.getColor() << endl;
 
+    int changeOption;
     
+    while (true)
+    {
+        cout << "Would you like to change anything? (1 for yes, 0 for no)" << endl;
+        cin >> changeOption;
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
+        if (changeOption == 1) 
+        {
+            int changeMenu;
+            cout << "What would you like to change? (1) Height (2) Length (3) Width (4) Color. (Or 5 to exit)" << endl;
+
+            //input validation
+            do
+            {
+                cin >> changeMenu;
+                if (!cin || changeMenu <= 0 || changeMenu > 5)
+                {
+                    cout << "Please enter a valid option (1-5)." << endl;
+                    cin.clear();
+                    cin.ignore(INT_MAX, '\n');
+                }
+            } while (!cin || changeMenu <= 0 || changeMenu > 5);
+
+
+            
+            //switch for which item to change
+            switch(changeMenu)
+            {
+                case 1: self.setHeight();
+                break;
+                case 2: self.setLength();
+                break;
+                case 3: self.setWidth();
+                break;
+                case 4: self.setColor();
+                break;
+                case 5: 
+                
+                break;
+
+
+            }
+            //call volume to update if anything is changed
+            self.calculateVolume();
+            cout << "Cube Properties: " << endl;
+    cout << "Height: " << self.getHeight() << " in." << endl;
+    cout << "Length: " << self.getLength() << " in." << endl;
+    cout << "Width: " << self.getWidth() << " in." << endl;
+    cout << "Volume: " << self.getVolume() << " inches cubed." <<endl;
+    cout << "Color: " << self.getColor() << endl;
+            continue;
+        }  
+        
+
+        if (changeOption == 0)
+        {
+            cout << "Goodbye" << endl;
+            break;
+        }
     
+    }
+        return 0;
+    }
+
+
     
 
-    return 0;
-}
+    
+
