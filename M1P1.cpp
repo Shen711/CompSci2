@@ -35,6 +35,11 @@ class Cube
     {
         return volume;
     }
+
+    string getColor()
+    {
+        return color;
+    }
     
     void setHeight()
     {
@@ -93,6 +98,27 @@ class Cube
         
     }
 
+    void setColor()
+    {
+        string cubeColor;
+        cout << "What is the color of the cube? " << endl;
+        do
+        {
+            getline(cin, cubeColor);
+            if (cubeColor.empty())
+            {
+                cout << "Enter a valid color. " << endl;
+                cin.clear();
+                cin.ignore(INT_MAX, '\n');
+            }
+        } while (cubeColor.empty());
+
+        color = cubeColor;
+
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
+    }
+
     void calculateVolume()
     {
         volume = length * width * height;
@@ -118,6 +144,7 @@ int main() {
     cout << "Length: " << self.getLength() << " in." << endl;
     cout << "Width: " << self.getWidth() << " in." << endl;
     cout << "Volume: " << self.getVolume() << " inches cubed." <<endl;
+    cout << "Color: " << self.getColor() << endl;
 
     
     
