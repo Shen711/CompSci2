@@ -1,8 +1,13 @@
-
-#include <stdio.h>
-#include <string>
+//Program Name: Cube Calculator
+//Author: Nathan Schoenike
+//Date Last Updated: 11/3/2025
+//Purpose: Calculate the volume of a cube based on input
 #include <iostream>
-#include <limits.h>
+#include <string>
+#include <climits>
+#include <limits>
+
+
 
 using namespace std;
 
@@ -12,10 +17,11 @@ class Cube
     int width;
     int height;
     int volume;
-    string color;
+    //added a default so my setter doesnt get stuck in infinite loop
+    string color = "Red (Default)";
 
     public:
-    
+    //my getters
      int getWidth()
     {
         return width;
@@ -40,7 +46,8 @@ class Cube
     {
         return color;
     }
-    
+
+    //setHeight method with validation
     void setHeight()
     {
         int cubeHeight;
@@ -59,7 +66,7 @@ class Cube
         height = cubeHeight;
         
     }
-
+    //simple setLength method with validation
     void setLength()
     {
         int cubeLength;
@@ -69,7 +76,7 @@ class Cube
             cin >> cubeLength;
             if (!cin || cubeLength <= 0)
             {
-                cout << "Enter a valid positive integer. " << endl;
+                cout << "Enter a valid positive number. " << endl;
                 cin.clear();
                 cin.ignore(INT_MAX, '\n');
             }
@@ -79,6 +86,7 @@ class Cube
         
     }
 
+    //simple setWidth method
     void setWidth()
     {
         int cubeWidth;
@@ -88,7 +96,7 @@ class Cube
             cin >> cubeWidth;
             if (!cin || cubeWidth <= 0)
             {
-                cout << "Enter a valid positive integer. " << endl;
+                cout << "Enter a valid positive integer . " << endl;
                 cin.clear();
                 cin.ignore(INT_MAX, '\n');
             }
@@ -98,12 +106,18 @@ class Cube
         
     }
 
+    //My setColor method. It can take in numbers, something I would rather not have. I did want to give the user option to pick
+    //their own unique color instead of a preset  though
     void setColor()
     {
         string cubeColor;
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         cout << "What is the color of the cube? " << endl;
         do
         {
+            
             getline(cin, cubeColor);
             if (cubeColor.empty())
             {
@@ -111,14 +125,16 @@ class Cube
                 cin.clear();
                 cin.ignore(INT_MAX, '\n');
             }
+            
+            
         } while (cubeColor.empty());
 
         color = cubeColor;
 
-        cin.clear();
-        cin.ignore(INT_MAX, '\n');
+        
     }
 
+    //volume is calculated at the end after all measurements are taken in
     void calculateVolume()
     {
         volume = length * width * height;
@@ -131,14 +147,16 @@ int main() {
     
     Cube self;
 
-    cout << "Hello." << endl;
-
+  
+    //call setters after creating object
     
     self.setHeight();
     self.setLength();
     self.setWidth();
+    self.setColor();
     self.calculateVolume();
 
+    //my display
     cout << "Cube Properties: " << endl;
     cout << "Height: " << self.getHeight() << " in." << endl;
     cout << "Length: " << self.getLength() << " in." << endl;
