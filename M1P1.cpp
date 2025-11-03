@@ -168,6 +168,7 @@ int main() {
 
     int changeOption;
     
+    //loop for if they want to chaneg anything
     while (true)
     {
         cout << "Would you like to change anything? (1 for yes, 0 for no)" << endl;
