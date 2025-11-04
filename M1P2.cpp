@@ -1,4 +1,7 @@
-
+//Program Name: Stereo Reciever
+//Author: Nathan Schoenike
+//Date Last Updated: 11/3/2025
+//Purpose: To input data about a specific stereo receiver
 #include <string>
 #include <iostream>
 #include <limits.h>
@@ -267,7 +270,7 @@ class StereoReceiver
         volumeLevel = vol;
         return volumeLevel;
     }
-
+    //returns a string AM or FM
     string setBand()
     {
         int bandInput;
@@ -308,6 +311,7 @@ class StereoReceiver
         return band;
     }
 
+    //bass boost which returns a boolean value, this is different from my others
     bool setBassBoost()
     {
         int bassInput;
@@ -385,6 +389,9 @@ class StereoReceiver
 int main()
 {
 
+    //had variables that I was going to use for user input initially, ended up going a different route.
+    //I decided to keep these here in case I want to ask you a question about them later. Wasnt sure if we were supposed to do it like this or how I did in my final submission
+    //
     string mfr;
     int model;
     int serial;
