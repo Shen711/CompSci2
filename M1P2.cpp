@@ -369,12 +369,12 @@ class StereoReceiver
     void displaySettings()
     {
         cout <<'\n' << endl;
-        cout << "Power: " << (powerOn ? "On" : "Off") << endl;
-        cout << "Station: " << station << endl;
-        cout << "Volume Level: " << volumeLevel << endl;
-        cout << "Band: " << band << endl;
-        cout << "Bass Boost: " << (bassBoost ? "Enabled" : "Disabled") << endl;
-        cout << "Current Track: " << currentTrack << endl;
+        cout << "Power: " << (getPowerOn() ? "On" : "Off") << endl;
+        cout << "Station: " << getStation() << endl;
+        cout << "Volume Level: " << getVolumeLevel() << endl;
+        cout << "Band: " << getBand() << endl;
+        cout << "Bass Boost: " << (getBass() ? "Enabled" : "Disabled") << endl;
+        cout << "Current Track: " << getCurrentTrack() << endl;
     }
 
     
