@@ -15,14 +15,15 @@ class StereoReceiver
     int serialNumber;
     int wattage;
     int numberOfChannels;
+    string band;
+    int station;
+    int volumeLevel;
+    bool powerOn;
+    bool bassBoost;
+    int currentTrack;
 
     public:
-        string band;
-        int station;
-        int volumeLevel;
-        bool powerOn;
-        bool bassBoost;
-        int currentTrack;
+        
 
 
     //Constructor, first had it parameterized, and created my set methods. Then realized I needed a default because I couldn't call my setters in main without an object first, so those values are place holders.
@@ -36,7 +37,7 @@ class StereoReceiver
     
 
 
-    //getters
+    //getters that return values to display functions
     string getManufacturer()
     {
         return manufacturer;
@@ -57,8 +58,32 @@ class StereoReceiver
     {
         return numberOfChannels;
     }
+    bool getBass()
+    {
+        return bassBoost;
+    }
+    bool getPowerOn()
+    {
+        return powerOn;
+    }
+    string getBand()
+    {
+        return band;
+    }
+    int getStation()
+    {
+        return station;
+    }
+    int getVolumeLevel()
+    {
+        return volumeLevel;
+    }
+    int getCurrentTrack()
+    {
+        return currentTrack;
+    }
 
-    //setters 
+    //setters with input validation inside them
     string setManufacturer()
     {
         //clear buffer
@@ -173,12 +198,12 @@ class StereoReceiver
         return numberOfChannels;
     }
 
-    //public variables
-    bool powerOn()
+    
+    bool setPowerOn()
     {
         int powerStatus;
         cout << "Would you like to power on the receiver? (0 for No, 1 for Yes): " << endl;
-        cout <<"Enter -1 at any time to exit." << endl;
+        
 
         do 
         {
@@ -213,6 +238,7 @@ class StereoReceiver
         } while (!cin || stationNumber < 1 || stationNumber > 9);
 
         station = stationNumber;
+        return station;
         
     }
 
@@ -244,7 +270,7 @@ class StereoReceiver
 
     string setBand()
     {
-        string bandInput;
+        int bandInput;
 
         cout << "Set band (1 for AM, 2 for FM): " << endl;
 
@@ -264,11 +290,11 @@ class StereoReceiver
             }
         }
 
-        if (bandInput == "1")
+        if (bandInput = 1)
         {
             band = "AM";
         }
-        else if (bandInput == "2")
+        else if (bandInput = 2)
         {
             band = "FM";
         }
@@ -278,19 +304,73 @@ class StereoReceiver
             band = "AM";
         }
 
+
         return band;
+    }
+
+    bool setBassBoost()
+    {
+        int bassInput;
+        cout << "Would you like to enable bass boost? (0 for No, 1 for Yes): " << endl;
+        do
+        {
+            cin >> bassInput;
+            if (!cin || bassInput < 0 || bassInput > 1)
+            {
+                cin.clear();
+                cin.ignore(INT_MAX, '\n');
+                cout << "Error. Please enter 0 for No or 1 for yes." << endl;
+            }
+        } while (!cin || bassInput < 0 || bassInput > 1);
+
+        bassBoost = static_cast<bool>(bassInput);
+        return bassBoost;
+        
+    }
+
+    int setCurrenTrack()
+    {
+        cout << "Which track do you want to play?" << endl;
+        int trackNumber;
+
+        do
+        {
+            cin >> trackNumber;
+            if (!cin || trackNumber < 0)
+            {
+                cout << "Error. Please enter a valid track number." << endl;
+                cin.clear();
+                cin.ignore(INT_MAX, '\n');
+            }
+        } while (!cin || trackNumber < 0);
+
+        currentTrack = trackNumber;
+         return currentTrack;
+        
     }
 
 
 
-
+//display for intial permanent settings
     void displayInfo()
     {
-        cout << "Manufacturer: " << manufacturer << endl;
-        cout << "Model: " << model << endl;
-        cout << "Serial Number: " << serialNumber << endl;
-        cout << "Wattage: " << wattage << "V " << endl;
-        cout << "Number of Channels: " << numberOfChannels << endl;
+        cout << "Manufacturer: " << getManufacturer() << endl;
+        cout << "Model: " << getModel() << endl;
+        cout << "Serial Number: " << getSerialNumber() << endl;
+        cout << "Wattage: " << getWattage() << "V " << endl;
+        cout << "Number of Channels: " << getNumberOfChannels() << endl;
+    }
+
+    //display for the settings they can switch
+    void displaySettings()
+    {
+        cout <<'\n' << endl;
+        cout << "Power: " << (powerOn ? "On" : "Off") << endl;
+        cout << "Station: " << station << endl;
+        cout << "Volume Level: " << volumeLevel << endl;
+        cout << "Band: " << band << endl;
+        cout << "Bass Boost: " << (bassBoost ? "Enabled" : "Disabled") << endl;
+        cout << "Current Track: " << currentTrack << endl;
     }
 
     
@@ -331,7 +411,53 @@ int main()
         cout << "Receiver Information:" << endl;
         userReciever.displayInfo();
         
-        userReciever.powerOn();
+        userReciever.setPowerOn();
+        userReciever.setStation();
+        userReciever.setVolume();
+        userReciever.setBand();
+        userReciever.setBassBoost();
+        userReciever.setCurrenTrack();
+
+        userReciever.displaySettings();
+        
+        //loop for updating settings, you need to update all settings if you are updating
+        int updateChoice;
+
+        while (true)
+        {
+            cout << "Do you want to update settings? (1 for yes, 0 for no):" << endl;
+            cin >> updateChoice;
+            if (!cin || (updateChoice != 0 && updateChoice != 1))
+            {
+                cin.clear();
+                cin.ignore(INT_MAX, '\n');
+                cout << "Error. Please enter 0 for no or 1 for yes." << endl;
+            }
+            
+            else if (updateChoice == 1)
+            {
+                cout << "Update your settings in the order they are prompted. " << endl;
+                userReciever.setPowerOn();
+                userReciever.setStation();
+                userReciever.setVolume();
+                userReciever.setBand();
+                userReciever.setBassBoost();
+                userReciever.setCurrenTrack();
+                userReciever.displaySettings();
+            }
+            else  if (updateChoice == 0)
+            {
+                 break;
+            }
+            else {
+                break;
+            }
+               
+            
+
+        }
+
+
 
 
         
