@@ -20,13 +20,34 @@ class Date
     int year;
 
     int monthDays[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
+    string monthNames[12] = {"January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     public:
 
     //
     Date(int d, int m, int y)
-    : day(d), month(m), year(y)
-    {}
+    
+    {
+        if (y > 2020 || y < 1900)
+        {
+            throw invalid_argument("The year must be an integer between 1900 and 2000. ");
+        }
+
+        if (m > 12 || m < 1)
+        {
+            throw invalid_argument("There are only twelve months in a year. Enter a valid integer month number. ");
+        }
+
+        //logic to correspond day input with month input and check for days
+        if (d > 1 || day > monthDays[m-1])
+        {
+            throw invalid_argument("You must have at least one day and no more than the amount in the selected month.");
+
+        }
+        day = d;
+        month = m;
+        year = y;
+
+    }
 
     //getters
     int getDay()
@@ -46,7 +67,9 @@ class Date
     {
         int d;
         cout << "Which day is the date? " << endl;
-        
+        cin >> d;
+
+        day = d;
         
 
     }
@@ -55,25 +78,57 @@ class Date
     {
         int m;
         cout << "Which month is the date? " << endl;
+        cin >> m;
+        
+        
+        
 
+        month = m;
 
     }
+        
+        
+        
+
+
+
+    
 
     void setYear()
     {
-        //max and min years
-        int minY = 1900;
-        int maxY = 2020;
         int y;
+        cout << "Which month is the date? " << endl;
+        cin >> y;
+        
+        year = y;
 
-        do 
-        {
-            cout << "What is the year of the date? " << endl;
-            cin >> y;
+        
 
-            
-        }
+        
     }
 
 
+};
+
+int main()
+{
+    int d, m, y;
+
+    cout << "Year: " << endl;
+        cin >> y;
+        cout << "Month: " << endl;
+        cin >> m;
+        cout << "Day: " << endl;
+        cin >> d;
+    try
+    {
+        
+
+        Date UserDate(d, m, y);
+        cout << d << m << y;
+    }
+    catch(invalid_argument& e)
+    {
+        cout << "Error: " << e.what() << endl;
+    }
 }
