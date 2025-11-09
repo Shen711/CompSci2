@@ -22,6 +22,7 @@ class StereoReceiver
     int station;
     int volumeLevel;
     bool powerOn;
+    //these two are the ones I chose.
     bool bassBoost;
     int currentTrack;
 
@@ -61,6 +62,7 @@ class StereoReceiver
     {
         return numberOfChannels;
     }
+    
     bool getBass()
     {
         return bassBoost;
