@@ -40,7 +40,7 @@ class Date
         if (d < 1 || d > monthDays[m-1])
         {
             throw invalid_argument("You must have at least one day and no more than the amount in the selected month.");
-            cout << d;
+            
         }
 
         
