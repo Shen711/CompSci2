@@ -116,11 +116,17 @@ class Date
     {
         int y;
         cout << "Which year is the date? " << endl;
+        
         cin >> y;
-        if (y > 2020 || y < 1900)
+        if (!cin || y > 2020 || y < 1900)
         {
             throw invalid_argument("The year must be an integer between 1900 and 2000. ");
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
         }
+        
+
+        
         
         year = y;
         
@@ -211,19 +217,54 @@ int main()
         }
         else 
         {
-            try 
+            //while loop to keep asking while throwing potential exceptions for all three getters
+            while(true)
             {
+                try 
+                {
                 UserDate.setYear();
-                UserDate.setMonth();
-                UserDate.setDay();
-            }
-            catch(invalid_argument& e)
-            {
+                break;
+                }
+                catch(invalid_argument& e)
+                {
                 cout << "Error occured: " << e.what() << endl;
                 cout << "Try again. " << endl;
                 cin.clear();
                 cin.ignore(INT_MAX, '\n');
+                }
             }
+            while(true)
+            {
+                try 
+                {
+                UserDate.setMonth();
+                break;
+                }
+                catch(invalid_argument& e)
+                {
+                cout << "Error occured: " << e.what() << endl;
+                cout << "Try again. " << endl;
+                cin.clear();
+                cin.ignore(INT_MAX, '\n');
+                }
+            }
+            while(true)
+            {
+                try 
+                {
+                UserDate.setDay();
+                break;
+                }
+                catch(invalid_argument& e)
+                {
+                cout << "Error occured: " << e.what() << endl;
+                cout << "Try again. " << endl;
+                cin.clear();
+                cin.ignore(INT_MAX, '\n');
+                }
+            }
+            UserDate.toString();
+            
 
 
         }
