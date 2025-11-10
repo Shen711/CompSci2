@@ -1,7 +1,7 @@
 //Program Name: Stereo Reciever
 //Author: Nathan Schoenike
-//Date Last Updated: 11/3/2025
-//Purpose: To input data about a specific stereo receiver
+//Date Last Updated: 11/10/2025
+//Purpose: To input data about a specific stereo receiver with try-catch blocks
 #include <string>
 #include <iostream>
 #include <limits.h>
@@ -34,6 +34,7 @@ class StereoReceiver
     StereoReceiver(string mfr, string mod, int serial, int watt, int channels, string bandInput, int stationNumber, int volume, bool power, bool bassInput, int trackNumber)
     
     {
+        //throw conditions when modifying or constructing object. These conditions will never be true when updating due to my while loops in main
         if (!cin || mfr.empty())
         {
             throw invalid_argument("Manufacturer must be provided. ");
@@ -143,7 +144,8 @@ class StereoReceiver
         return currentTrack;
     }
 
-    //setters with input validation inside them
+    //setters do not loop inside method for validation. To demonstrate the catch I leave the error as is, and then whatever is thrown is caught in main when constructor object is modified.
+    //This is to follow the assignment instructions. When updating I have methods inside individual while loop in main to repeat if there is error, before assigning the values to the object.
     void setManufacturer()
     {
         //clear buffer
@@ -413,7 +415,7 @@ int main()
 {
 
     
-
+//menu
     int menuChoice;
 
     cout << "Stereo Receiver Controller Menu" << endl;
@@ -423,6 +425,7 @@ int main()
     cin >> menuChoice;
     if (menuChoice == 1)
     {
+        //local variables to hold input for constructor, without these I was getting errors about not being able to call the constructor because I didn't have any data to put in it. Set is just for updating after initial values
         string manufacturer;
     string model;
     int serialNumber;
@@ -440,6 +443,7 @@ int main()
         //intitialize object with default values so I can then modify it
         StereoReceiver userReciever("Default Manufacturer", "Default Model", 123456, 100, 2, "AM", 1, 50, false, false, 0);
         
+        //loop so if error occurs it will continue until valid
         while(true)
     {
     try
@@ -494,7 +498,7 @@ int main()
         userReciever.displayInfo();
         userReciever.displaySettings();
         break;
-        //if there are no exceptions thrown the code wont even make it to this point
+        //if there are exceptions, the code will not get to the break and stop at the modification of the object
 
         
     }
@@ -510,7 +514,7 @@ int main()
 }
 
 
-        //loop for updating settings, you need to update all settings if you are updating
+        //loop for updating settings, you need to update all settings if you are updating. 
         int updateChoice;
 
         while (true)
@@ -528,81 +532,10 @@ int main()
             {
                 cout << "Update your settings in the order they are prompted. " << endl;
                 
-                while(true)
-            {
-            //     try 
-            //     {
-            //     userReciever.setManufacturer();
-            //     break;
-            //     }
-            //     catch(invalid_argument& e)
-            //     {
-            //     cout << "Error occured: " << e.what() << endl;
-            //     cout << "Try again. " << endl;
-            //     cin.clear();
-            //     cin.ignore(INT_MAX, '\n');
-            //     }
-            // }
-            //     while(true)
-            // {
-            //     try 
-            //     {
-            //     userReciever.setModel();
-            //     break;
-            //     }
-            //     catch(invalid_argument& e)
-            //     {
-            //     cout << "Error occured: " << e.what() << endl;
-            //     cout << "Try again. " << endl;
-            //     cin.clear();
-            //     cin.ignore(INT_MAX, '\n');
-            //     }
-            // }
-            //     while(true)
-            //     {
-            //     try 
-            //     {
-            //     userReciever.setSerialNumber();
-            //     break;
-            //     }
-            //     catch(invalid_argument& e)
-            //     {
-            //     cout << "Error occured: " << e.what() << endl;
-            //     cout << "Try again. " << endl;
-            //     cin.clear();
-            //     cin.ignore(INT_MAX, '\n');
-            //     }
-            // }
-            //     while(true)
-            //     {
-            //     try 
-            //     {
-            //     userReciever.setWattage();
-            //     break;
-            //     }
-            //     catch(invalid_argument& e)
-            //     {
-            //     cout << "Error occured: " << e.what() << endl;
-            //     cout << "Try again. " << endl;
-            //     cin.clear();
-            //     cin.ignore(INT_MAX, '\n');
-            //     }
-            // }
-            //     while(true)
-            //     {
-            //     try 
-            //     {
-            //     userReciever.setNumberOfChannels();
-            //     break;          
-            //     }
-            //     catch(invalid_argument& e)
-            //     {
-            //     cout << "Error occured: " << e.what() << endl;
-            //     cout << "Try again. " << endl;
-            //     cin.clear();
-            //     cin.ignore(INT_MAX, '\n');
-            //     }
-            // }
+                
+            
+        //each setting has a while loop, if there is an exception it will throw, display, but then go back and restart the input for the setting. 
+        //This lets the user fix a mistake without having to go through the whole process
             while(true)
             {
                 try 
@@ -699,7 +632,7 @@ int main()
                 userReciever.displaySettings();
                 break;
             }
-        }
+        
             else  if (updateChoice == 0)
             {
                  break;
@@ -708,15 +641,14 @@ int main()
                 break;
             }
                
-            
-
         }
 
+        }
+        return 0;
         
     }
 
 
 
 
-    return 0;
-}
+    
