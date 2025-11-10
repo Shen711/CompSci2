@@ -31,21 +31,27 @@ class Date
         {
             throw invalid_argument("The year must be an integer between 1900 and 2000. ");
         }
-
         if (m > 12 || m < 1)
         {
             throw invalid_argument("There are only twelve months in a year. Enter a valid integer month number. ");
         }
-
+        
         //logic to correspond day input with month input and check for days
-        if (d > 1 || day > monthDays[m-1])
+        if (d < 1 || d > monthDays[m-1])
         {
             throw invalid_argument("You must have at least one day and no more than the amount in the selected month.");
-
+            cout << d;
         }
+
+        
         day = d;
         month = m;
         year = y;
+        
+
+        
+
+        
 
     }
 
@@ -65,10 +71,19 @@ class Date
 
     void setDay()
     {
+        
         int d;
         cout << "Which day is the date? " << endl;
         cin >> d;
+        //logic to correspond day input with month input and check for days
+        if (d < 1 || d > monthDays[month-1])
+        {
+            throw invalid_argument("You must have at least one day and no more than the amount in the selected month.");
 
+        }
+
+        
+        
         day = d;
         
 
@@ -79,7 +94,10 @@ class Date
         int m;
         cout << "Which month is the date? " << endl;
         cin >> m;
-        
+        if (m > 12 || m < 1)
+        {
+            throw invalid_argument("There are only twelve months in a year. Enter a valid integer month number. ");
+        }
         
         
 
@@ -97,14 +115,36 @@ class Date
     void setYear()
     {
         int y;
-        cout << "Which month is the date? " << endl;
+        cout << "Which year is the date? " << endl;
         cin >> y;
+        if (y > 2020 || y < 1900)
+        {
+            throw invalid_argument("The year must be an integer between 1900 and 2000. ");
+        }
         
         year = y;
-
         
+    }
 
+    void toString()
+    {
+        int d = getDay();
+        int m = getMonth();
+        int y = getYear();
         
+        
+        string d1 = to_string(d);
+        string m1 = (monthNames[m - 1]);
+        string y1 = to_string(y);
+
+        cout <<"Date entered: " << m1 << " " << setw(2) << setfill('0') << d1 << ", " << y1 << endl;
+
+
+
+
+
+
+
     }
 
 
@@ -113,6 +153,14 @@ class Date
 int main()
 {
     int d, m, y;
+    //needed to initialize 
+    Date UserDate(1, 1, 2000);
+
+    while(true)
+    {
+    try
+    {
+        
 
     cout << "Year: " << endl;
         cin >> y;
@@ -120,15 +168,66 @@ int main()
         cin >> m;
         cout << "Day: " << endl;
         cin >> d;
-    try
-    {
-        
+        UserDate = Date(d, m, y);
+        UserDate.toString();
 
-        Date UserDate(d, m, y);
-        cout << d << m << y;
+        break;
+        //if there are no exceptions thrown the code wont even make it to this point
+
+        
     }
     catch(invalid_argument& e)
     {
         cout << "Error: " << e.what() << endl;
+        cout <<"Try again. " << endl;
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
+        //clear old data in input
+        
     }
+    
+
+    
+    }
+
+    //modifying menu
+    int choice;
+    
+    while(true)
+    {
+        cout << "Would you like to modify the date (1 for yes, 0 for no)? " << endl;
+        cin >> choice;
+
+        if (!cin || choice < 0 || choice > 1)
+        {
+            cout << "Error. Input 1 or 0. " << endl;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+
+        }
+        else if (choice == 0)
+        {
+            return 0;
+        }
+        else 
+        {
+            try 
+            {
+                UserDate.setYear();
+                UserDate.setMonth();
+                UserDate.setDay();
+            }
+            catch(invalid_argument& e)
+            {
+                cout << "Error occured: " << e.what() << endl;
+                cout << "Try again. " << endl;
+                cin.clear();
+                cin.ignore(INT_MAX, '\n');
+            }
+
+
+        }
+    }
+
+    
 }
