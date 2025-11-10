@@ -18,15 +18,16 @@ class Date
     int day;
     int month;
     int year;
-
+//arrays to hold month days and month names. Indexes corresponds to each other.
     int monthDays[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     string monthNames[12] = {"January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     public:
 
-    //
+    //constructor with parameters
     Date(int d, int m, int y)
     
     {
+        //throw conditions for parameters when first modifying or constructing the object. Will not be true when update is selected.
         if (y > 2020 || y < 1900)
         {
             throw invalid_argument("The year must be an integer between 1900 and 2000. ");
@@ -69,13 +70,14 @@ class Date
         return year;
     }
 
+    //setters with conditional throws. No validation because that is done when values are assigned to the object in main. This is to follow the instructions
     void setDay()
     {
         
         int d;
         cout << "Which day is the date? " << endl;
         cin >> d;
-        //logic to correspond day input with month input and check for days
+        //logic to correspond day input with month input and check for days in the month
         if (d < 1 || d > monthDays[month-1])
         {
             throw invalid_argument("You must have at least one day and no more than the amount in the selected month.");
@@ -132,6 +134,7 @@ class Date
         
     }
 
+    //toString method to display the date formatted per instructions
     void toString()
     {
         int d = getDay();
@@ -150,7 +153,6 @@ class Date
 
 
 
-
     }
 
 
@@ -162,6 +164,7 @@ int main()
     //needed to initialize 
     Date UserDate(1, 1, 2000);
 
+    //while loops to keep asking until valid input
     while(true)
     {
     try
@@ -217,7 +220,7 @@ int main()
         }
         else 
         {
-            //while loop to keep asking while throwing potential exceptions for all three getters
+            //while loop to keep asking while throwing potential exceptions for all three setters
             while(true)
             {
                 try 
