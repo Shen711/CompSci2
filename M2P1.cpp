@@ -30,7 +30,7 @@ class Date
         //throw conditions for parameters when first modifying or constructing the object. Will not be true when update is selected.
         if (y > 2020 || y < 1900)
         {
-            throw invalid_argument("The year must be an integer between 1900 and 2000. ");
+            throw invalid_argument("The year must be an integer between 1900 and 2020. ");
         }
         if (m > 12 || m < 1)
         {

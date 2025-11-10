@@ -463,13 +463,17 @@ int main()
 
         cout << "Serial Number: " << endl;
         cin >> serialNumber;
+        // if (!cin || serialNumber < 100000 || serialNumber > 999999)
+        // {
+        //     throw invalid_argument("Serial must be a 6 digit long integer.");
+        // }
         cout << "Wattage: " << endl;
         cin >> wattage;
         cout << "Number of Channels: " << endl;
         cin >> numberOfChannels;
         cout << "Band (1 for AM, 2 for FM): " << endl;
         cin >> bandInput;
-        //loop for converting construcotor parameter to string
+        //condition for converting construcotor parameter to string
         if (bandInput == 1)
         {
             band = "AM";
@@ -478,9 +482,10 @@ int main()
         {
             band = "FM";
         }
-        else
+        else if (!cin || bandInput > 2 || bandInput < 1)
         {
-            throw invalid_argument("Band Error. Please enter a integer between 1 and 2.");
+            //default
+            band = "FM";
         }
         cout << "Station: " << endl;
         cin >> station;
