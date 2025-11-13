@@ -17,7 +17,7 @@ class Grade
     //array which corresponds to template
     T quizScores[16];
 
-    int highScore;
+    
     int lowScore;
     int quizscore;
 
@@ -26,7 +26,7 @@ class Grade
     int getModuleScore(int index)
     {
         
-        if (imdex < 0 || index > 15)
+        if (index < 0 || index > 15)
         {
             throw invalid_argument("Module number must be between 1 and 16. ");
         }
@@ -35,7 +35,16 @@ class Grade
     }
     int getHigh()
     {
-        return highScore;
+        int highvalue = 0;
+        for (int i = 0; i < 16; i++)
+        {
+            //loop that compares every value to the last, if it isnt higher it skips. 
+            if (quizScores[i] > highvalue)
+            {
+                highvalue = quizScores[i];
+            }
+        }
+        return highvalue;
     }
 
     int getLow()
@@ -91,5 +100,8 @@ int main()
     {
         cout << "Module " << i + 1 << ": " << QuizGrades.getModuleScore(i) << endl;
     }
+
+    //display high and low scores
+    cout << "High Score: " << QuizGrades.getHigh() << endl;
 
 }
