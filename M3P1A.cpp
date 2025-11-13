@@ -49,6 +49,16 @@ class Grade
 
     int getLow()
     {
+        int lowvalue = 0;
+        for (int i = 0; i < 16; i++)    
+        {
+            if (quizScores[i] < lowvalue)
+            {
+                lowvalue = quizScores[i];
+            }
+
+
+        }
         return lowScore;
     }   
     //all values returned are of type T, but the assignment only calls for integers. Figured I would keep it as template to demonstrate I know the difference
@@ -103,5 +113,6 @@ int main()
 
     //display high and low scores
     cout << "High Score: " << QuizGrades.getHigh() << endl;
+    cout << "Low Score: " << QuizGrades.getLow() << endl;
 
 }
