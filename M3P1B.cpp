@@ -100,17 +100,41 @@ class Computer
     
     void setRAM()
     {
-        
+        int RAM;
+        cout << "RAM (4, 6, 8, 16, 32, or 64GB): " << endl;
+        cin >> RAM;
+        if (!cin || RAM <= 0 || (RAM != 4 && RAM != 6 && RAM != 8 && RAM != 16 && RAM != 32 && RAM != 64))
+        {
+            throw invalid_argument("RAM must be one of the following sizes: 4, 6, 8, 16, 32, or 64GB. ");
+        }
+        ram = RAM;
+
     }
 
     void setStorageSize()
     {
-
+        string size;
+        cout << "Storage Size (128GB, 256GB, 512GB, 1TB, 2TB): " << endl;
+        cin >> size;
+        if (sSize.empty())
+        {
+            throw invalid_argument("Storage size must be 128GB, 256GB, 512 GB, 1TB, or 2TB. ");
+        }
+        sSize = size;
+                
     }
 
     void setStorageType()
     {
-
+        string type;
+        cout << "Storage Type (e.g. HDD, SSD, UFS): " << endl;
+        cin >> type;
+        if (sType.empty())
+        {
+            throw invalid_argument("Storage type cannot be empty. ");
+        }
+        sType = type;
+        
     }
 
     void toString()
@@ -140,7 +164,7 @@ int main()
     int ram;
     string storageType;
     string storageSize;
-    string pcchoice;
+    
 
     Computer myPC("Dell", "Desktop", 123456, "I7", 16, "SSD", "64GB");
 
@@ -151,33 +175,42 @@ int main()
         
         cout << "Please enter information about your PC using our pre-set options: " << endl;
         cout << "Manufacturer (e.g. Dell, Gateway, etc.): " << endl;
-        cin >> manufacturer;
+        
+        getline(cin, manufacturer);
         
 
         cout << "Form Factor (e.g. Desktop, Laptop): " << endl;
-        cin >> formFactor;
+        
+        getline(cin, formFactor);
+        
+        
         
 
         cout << "Serial Number: " << endl;
         cin >> serial;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         cout << "Processor ( I3, I5, I7, AMD Ryzen 3, AMD Ryzen 5, etc.): " << endl;
+        
         cin >> processor;
 
         cout << "RAM (4, 6, 8, 16, 32, or 64GB): " << endl;
         cin >> ram;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         cout << "Storage Type (e.g. HDD, SSD, UFS): " << endl;
+        
         cin >> storageType;
 
         cout << "Storage Size (128GB, 256GB, 512GB, 1TB, 2TB): " << endl;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin >> storageSize;
         
         try
         {
             myPC = Computer(manufacturer, formFactor, serial, processor, ram, storageType, storageSize);
-            //Store in vecotr using pushback
-            pcList.push_back(myPC);
+            //Displays it, only stores it after it confirms they dont want to change
+            
             myPC.toString();
             break;
         
@@ -193,8 +226,65 @@ int main()
 
         
     } 
+    int editchoice;
+    cout << "Would you like to modify the PC? (0 for no, 1 for yes): " << endl;
+    cin >> editchoice;
+    if (editchoice == 1)
+    {
+        while (true)
+        {
+            try
+            {
+                myPC.setRAM();
+                break;
+                
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << '\n';
+                cout << "Please try again. " << endl;
+            }
 
-    cout << "Would you like to modify the PC? (Y/N): " << endl;
+        }
+        while (true)
+        {
+            try
+            {
+                myPC.setStorageType();
+                break;
+                
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << '\n';
+                cout << "Please try again. " << endl;
+            }
+
+        }
+        while(true)
+        {
+            try
+            {
+                myPC.setStorageSize();
+                break;
+                
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << '\n';
+                cout << "Please try again. " << endl;
+            }
+
+        }
+        cout << "Updated PC Info: " << endl;
+        cout << "----------------" << endl;
+        myPC.toString();
+    }
+    if (editchoice == 0)
+    {
+        pcList.push_back(myPC);
+    }
+
     
         
 
