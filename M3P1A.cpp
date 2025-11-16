@@ -17,50 +17,69 @@ class Grade
     //array which corresponds to template
     T quizScores[16];
 
-    
+    int moduleNum;
+    int lowmoduleNum;
     int lowScore;
     int quizscore;
 
     public:
     
-    int getModuleScore(int index)
+    int getModuleScore(int score)
     {
         
-        if (index < 0 || index > 15)
-        {
-            throw invalid_argument("Module number must be between 1 and 16. ");
-        }
-        return quizScores[index];
+        
+        return quizScores[score];
         
     }
     int getHigh()
     {
         int highvalue = 0;
+        int moduleNum;
         for (int i = 0; i < 16; i++)
         {
             //loop that compares every value to the last, if it isnt higher it skips. 
             if (quizScores[i] > highvalue)
             {
                 highvalue = quizScores[i];
+                moduleNum = i + 1;
             }
         }
-        return highvalue;
+        return moduleNum;
     }
 
     int getLow()
     {
-        int lowvalue = 0;
+        int lowvalue = 101;
+        lowmoduleNum = 0;
         for (int i = 0; i < 16; i++)    
         {
             if (quizScores[i] < lowvalue)
             {
                 lowvalue = quizScores[i];
+                //finds the module number based on comparing the elements
+                lowmoduleNum = i + 1;
             }
 
 
+
         }
-        return lowScore;
+        
+        return lowmoduleNum;
     }   
+
+    int getAverage()
+    {
+        //initialize sum because average is 0 right now
+        int sum = 0;
+        for (int i = 0; i < 16; i++)
+        {
+            sum += quizScores[i];
+        }
+        //average varable to divide the sum, to make it a double put it through static cast
+        double average = static_cast<double>(sum) / 16.0;
+
+        return average;
+    }
     //all values returned are of type T, but the assignment only calls for integers. Figured I would keep it as template to demonstrate I know the difference
     // T getData()
     // {
@@ -109,10 +128,23 @@ int main()
     for (int i = 0; i < 16; i++)
     {
         cout << "Module " << i + 1 << ": " << QuizGrades.getModuleScore(i) << endl;
+
     }
+    
+    //gets high and low corresponding index, then it is plugged into the 
+    int highScoreModule = QuizGrades.getHigh();
+    int lowScoreModule = QuizGrades.getLow();
+
+    int highScore = QuizGrades.getModuleScore(highScoreModule - 1);
+    int lowScore = QuizGrades.getModuleScore(lowScoreModule - 1);
+
 
     //display high and low scores
-    cout << "High Score: " << QuizGrades.getHigh() << endl;
-    cout << "Low Score: " << QuizGrades.getLow() << endl;
+    cout << "Your high Score was in Module " << highScoreModule << ": " << highScore  << endl;
+    cout << "Your low Score was in Module " << lowScoreModule << ": " << lowScore <<  endl;
+
+    cout << "Average Score is  " << QuizGrades.getAverage() << endl;
+
+
 
 }
