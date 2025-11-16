@@ -212,7 +212,7 @@ int main()
             //Displays it, only stores it after it confirms they dont want to change
             
             myPC.toString();
-            break;
+            
         
             
         }
@@ -222,11 +222,7 @@ int main()
 
 
         }
-        
-
-        
-    } 
-    int editchoice;
+            int editchoice;
     cout << "Would you like to modify the PC? (0 for no, 1 for yes): " << endl;
     cin >> editchoice;
     if (editchoice == 1)
@@ -279,13 +275,44 @@ int main()
         cout << "Updated PC Info: " << endl;
         cout << "----------------" << endl;
         myPC.toString();
-    }
+        continue;
+        }
     if (editchoice == 0)
-    {
+        {
         pcList.push_back(myPC);
-    }
+        continue;
+        }
+
+        int addPC;
+        cout << "Would you like to add another PC? (0 for no, 1 for yes): " << endl;
+        while(true)
+        {
+            cin >> addPC; 
+            if (!cin || addPC < 0 || addPC > 1)
+            {
+                cin.clear();
+                cin.ignore(INT_MAX, '\n');
+                cout << "Error. Please enter 0 for no or 1 for yes." << endl;
+            }
+            else if (addPC == 1)
+            {
+                 break;
+            }
+            else if (addPC == 0)
+            {
+                cout << "All PCs entered: " << endl;
+                cout << "----------------" << endl;
+                return 0;
+            }
+        }
 
     
         
 
-}
+    }
+
+        
+
+        
+    } 
+
