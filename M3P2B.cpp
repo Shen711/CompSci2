@@ -9,15 +9,25 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <sstream>
 
 using namespace std;
 
+struct StateInfo
+{
+    string name;
+    string gov;
+    string flower;
+}
 
 int main()
 {
     map<string, vector<string>> stateMap;
 
     string abbrev, name, govenor, flower;
+
+    //had to do some research and find how to ignore the commas and included certain whitespaces. using ss I can read each line and divide it up using the seperator with getline
+    string line;
 
     fstream wordFile("M3P2B.txt");
 
@@ -29,13 +39,15 @@ int main()
 
     else 
     {
-        while (wordFile >> abbrev >> name >> govenor >> flower)
+        while (getline(wordFile, line))
         {
-            stateMap[abbrev].push_back(name);
-            stateMap[abbrev].push_back(govenor);
-            stateMap[abbrev].push_back(flower);
+            //string stream object which represents 1 whole line
+            stringstream ss(line);
+            string ab = getline (ss, abbrev, ",");
+            string n = getline (ss, name, ",");
+            string gov = getline (ss, govenor, ",");
+            string fl = getline (ss, flower, ",");
         }
-    }
 
     for (auto state : stateMap)
     {
