@@ -96,8 +96,9 @@ class Computer
     }
 
     //setters
-
-    
+    //They will throw exceptions to the catch used in the main individually for each variable
+ 
+    //Only have setters for the variables that are mentioned in the assignment description.
     void setRAM()
     {
         int RAM;
@@ -168,6 +169,8 @@ int main()
 
     Computer myPC("Dell", "Desktop", 123456, "I7", 16, "SSD", "64GB");
 
+    //In this loop it asks for variables from user then inserts into the constructor. If error occurs you will have to input all variables again. 
+
     cout << "Welcome to the PC Data Entry System." << endl;
     cout << "------------------------------" << endl;
     while (true)
@@ -192,7 +195,7 @@ int main()
 
         cout << "Processor ( I3, I5, I7, AMD Ryzen 3, AMD Ryzen 5, etc.): " << endl;
         
-        cin >> processor;
+        getline(cin, processor);
 
         cout << "RAM (4, 6, 8, 16, 32, or 64GB): " << endl;
         cin >> ram;
@@ -208,6 +211,7 @@ int main()
         
         try
         {
+            //Have this in a try block to catch possible exceptions. 
             myPC = Computer(manufacturer, formFactor, serial, processor, ram, storageType, storageSize);
             //Displays it, only stores it after it confirms they dont want to change
             
@@ -222,11 +226,14 @@ int main()
 
 
         }
+
             int editchoice;
     cout << "Would you like to modify the PC? (0 for no, 1 for yes): " << endl;
     cin >> editchoice;
     if (editchoice == 1)
     {
+        //This logic below is the same I used in my previous assignment. It loops through each setting and if error, it will catch and retry with the while loop. 
+        //I wasn't sure about the catches so I just made it catch all exceptions.
         while (true)
         {
             try
@@ -235,7 +242,7 @@ int main()
                 break;
                 
             }
-            catch(const std::exception& e)
+            catch(exception& e)
             {
                 std::cerr << e.what() << '\n';
                 cout << "Please try again. " << endl;
@@ -250,7 +257,7 @@ int main()
                 break;
                 
             }
-            catch(const std::exception& e)
+            catch(exception& e)
             {
                 std::cerr << e.what() << '\n';
                 cout << "Please try again. " << endl;
@@ -265,7 +272,7 @@ int main()
                 break;
                 
             }
-            catch(const std::exception& e)
+            catch(exception& e)
             {
                 std::cerr << e.what() << '\n';
                 cout << "Please try again. " << endl;
@@ -275,14 +282,16 @@ int main()
         cout << "Updated PC Info: " << endl;
         cout << "----------------" << endl;
         myPC.toString();
-        continue;
+        pcList.push_back(myPC);
+        
         }
     if (editchoice == 0)
+    //if no edit is required, PC is added to vector and program starts again
         {
         pcList.push_back(myPC);
-        continue;
+        
         }
-
+        //If user doesnt want to add another, it ends and displays all 
         int addPC;
         cout << "Would you like to add another PC? (0 for no, 1 for yes): " << endl;
         while(true)
@@ -296,15 +305,25 @@ int main()
             }
             else if (addPC == 1)
             {
+                //added this so when it goes back into program it can get manufacturer with input cleared
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                  break;
+
             }
             else if (addPC == 0)
             {
                 cout << "All PCs entered: " << endl;
                 cout << "----------------" << endl;
+                for (int i = 0; i < pcList.size(); i++)
+                {
+                    cout << "PC " << i + 1 << ":" << endl;
+                    pcList[i].toString();
+                    cout << "----------------" << endl;
+                }
                 return 0;
             }
         }
+        continue;
 
     
         
