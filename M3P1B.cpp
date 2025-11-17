@@ -1,4 +1,4 @@
-//Program Name: Stereo Reciever
+//Program Name: Computer Data
 //Author: Nathan Schoenike
 //Date Last Updated: 11/16/2025
 //Purpose: To input data about PCs and store them in a vector

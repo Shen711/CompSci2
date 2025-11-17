@@ -35,7 +35,7 @@ int main()
 
     cout << "Unique words in the file: " << endl;
     int Siz = nonduplicate.size();
-
+//to diplay the size of set
     cout << Siz << endl;
 
     //Words automatically sort in ascending order of letter in word

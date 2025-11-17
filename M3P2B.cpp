@@ -45,7 +45,7 @@ int main()
     {
         while (getline(wordFile, line))
         {
-            //string stream object which represents 1 whole line, inside this line it will look at 4 items below
+            //string stream object which represents 1 whole line, inside this line it will look at 4 items below and ignore the unnecessaries
             stringstream ss(line);
             if (getline(ss, abbrev, ',') && getline(ss, name, ',') && getline(ss, govenor, ',') && getline(ss, flower, ' '))
         {

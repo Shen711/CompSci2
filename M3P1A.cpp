@@ -1,7 +1,7 @@
-//Program Name: Stereo Reciever
+//Program Name: Quiz Grades
 //Author: Nathan Schoenike
 //Date Last Updated: 11/10/2025
-//Purpose: To input data about a specific stereo receiver with try-catch blocks
+//Purpose: To input quiz grades and display average and high and low scores 
 #include <string>
 #include <iostream>
 #include <limits.h>
