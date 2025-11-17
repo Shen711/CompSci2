@@ -5,6 +5,7 @@
         "stdexcept": "cpp",
         "optional": "cpp",
         "string": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "iomanip": "cpp"
     }
 }

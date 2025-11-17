@@ -6,6 +6,7 @@
 #include <iostream>
 #include <limits.h>
 #include <limits>
+#include <iomanip>
 
 
 using namespace std;
@@ -29,6 +30,7 @@ class Grade
         
         
         return quizScores[score];
+        
         
     }
     int getHigh()
@@ -67,7 +69,7 @@ class Grade
         return lowmoduleNum;
     }   
 
-    int getAverage()
+    double getAverage()
     {
         //initialize sum because average is 0 right now
         int sum = 0;
@@ -112,6 +114,7 @@ class Grade
 
 int main()
 {
+
     Grade<int> QuizGrades;
 
     try
@@ -143,7 +146,7 @@ int main()
     cout << "Your high Score was in Module " << highScoreModule << ": " << highScore  << endl;
     cout << "Your low Score was in Module " << lowScoreModule << ": " << lowScore <<  endl;
 
-    cout << "Average Score is  " << QuizGrades.getAverage() << endl;
+    cout << "Average Score is  " << fixed << setprecision(2) << QuizGrades.getAverage() << endl;
 
 
 
