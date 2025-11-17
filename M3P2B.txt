@@ -1,0 +1,50 @@
+AL,Alabama,Kay Ivey,Camellia  
+AK,Alaska,Mike Dunleavy,Forget-me-not  
+AZ,Arizona,Katie Hobbs,Saguaro Cactus Blossom  
+AR,Arkansas,Sarah Huckabee Sanders,Apple Blossom  
+CA,California,Gavin Newsom,California Poppy  
+CO,Colorado,Jared Polis,Rocky Mountain Columbine  
+CT,Connecticut,Ned Lamont,Mountain Laurel  
+DE,Delaware,Matt Meyer,Peach Blossom  
+FL,Florida,Ron DeSantis,Orange Blossom  
+GA,Georgia,Brian Kemp,Cherokee Rose  
+HI,Hawaii,Josh Green,Hibiscus  
+ID,Idaho,Brad Little,Syringa  
+IL,Illinois,J. B. Pritzker,Violet  
+IN,Indiana,Mike Braun,Peony  
+IA,Iowa,Kim Reynolds,Wild Rose  
+KS,Kansas,Laura Kelly,Sunflower  
+KY,Kentucky,Andy Beshear,Goldenrod  
+LA,Louisiana,Jeff Landry,Magnolia  
+ME,Maine,Janet Mills,White Pine Cone and Tassel  
+MD,Maryland,Wes Moore,Black-eyed Susan  
+MA,Massachusetts,Maura Healey,Mayflower  
+MI,Michigan,Gretchen Whitmer,Apple Blossom  
+MN,Minnesota,Tim Walz,Pink & White Lady Slipper  
+MS,Mississippi,Tate Reeves,Magnolia  
+MO,Missouri,Mike Kehoe,Hawthorn  
+MT,Montana,Greg Gianforte,Bitterroot  
+NE,Nebraska,Jim Pillen,Goldenrod  
+NV,Nevada,Joe Lombardo,Sagebrush  
+NH,New Hampshire,Kelly Ayotte,Purple Lilac  
+NJ,New Jersey,Phil Murphy,Violet  
+NM,New Mexico,Michelle Lujan Grisham,Yucca  
+NY,New York,Kathy Hochul,Rose  
+NC,North Carolina,Josh Stein,Dogwood  
+ND,North Dakota,Kelly Armstrong,Wild Prairie Rose  
+OH,Ohio,Mike DeWine,Scarlet Carnation  
+OK,Oklahoma,Kevin Stitt,Oklahoma Rose  
+OR,Oregon,Tina Kotek,Oregon Grape  
+PA,Pennsylvania,Josh Shapiro,Mountain Laurel  
+RI,Rhode Island,Dan McKee,Violet  
+SC,South Carolina,Henry McMaster,Yellow Jessamine  
+SD,South Dakota,Larry Rhoden,American Pasqueflower  
+TN,Tennessee,Bill Lee,Iris  
+TX,Texas,Greg Abbott,Bluebonnet  
+UT,Utah,Spencer Cox,Sego Lily  
+VT,Vermont,Phil Scott,Red Clover  
+VA,Virginia,Glenn Youngkin,American Dogwood  
+WA,Washington,Bob Ferguson,Coast Rhododendron  
+WV,West Virginia,Patrick Morrisey,Rhododendron  
+WI,Wisconsin,Tony Evers,Wood Violet  
+WY,Wyoming,Mark Gordon,Indian Paintbrush  
