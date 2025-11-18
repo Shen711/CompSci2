@@ -166,7 +166,7 @@ int main()
     string storageType;
     string storageSize;
     
-
+//default object to modify
     Computer myPC("Dell", "Desktop", 123456, "I7", 16, "SSD", "64GB");
 
     //In this loop it asks for variables from user then inserts into the constructor. If error occurs you will have to input all variables again. 
@@ -176,6 +176,8 @@ int main()
     while (true)
     {
         
+        while(true){      
+            try{  
         cout << "Please enter information about your PC using our pre-set options: " << endl;
         cout << "Manufacturer (e.g. Dell, Gateway, etc.): " << endl;
         
@@ -203,29 +205,33 @@ int main()
 
         cout << "Storage Type (e.g. HDD, SSD, UFS): " << endl;
         
-        cin >> storageType;
+        getline(cin, storageType);
 
         cout << "Storage Size (128GB, 256GB, 512GB, 1TB, 2TB): " << endl;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> storageSize;
         
-        try
-        {
+        getline(cin, storageSize);
+        
+        
+        
             //Have this in a try block to catch possible exceptions. 
             myPC = Computer(manufacturer, formFactor, serial, processor, ram, storageType, storageSize);
             //Displays it, only stores it after it confirms they dont want to change
             
             myPC.toString();
-            
+            break;
         
             
         }
         catch(const std::exception& e)
         {
-            std::cerr << e.what() << '\n';
+            cerr << e.what() << '\n';
+            cout << "Try again." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 
         }
+    }
 
             int editchoice;
     cout << "Would you like to modify the PC? (0 for no, 1 for yes): " << endl;
@@ -244,8 +250,10 @@ int main()
             }
             catch(exception& e)
             {
-                std::cerr << e.what() << '\n';
+                cerr << e.what() << '\n';
                 cout << "Please try again. " << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');    
             }
 
         }
@@ -259,8 +267,10 @@ int main()
             }
             catch(exception& e)
             {
-                std::cerr << e.what() << '\n';
+                cerr << e.what() << '\n';
                 cout << "Please try again. " << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');    
             }
 
         }
@@ -274,8 +284,10 @@ int main()
             }
             catch(exception& e)
             {
-                std::cerr << e.what() << '\n';
+                cerr << e.what() << '\n';
                 cout << "Please try again. " << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');    
             }
 
         }
