@@ -6,6 +6,7 @@
         "optional": "cpp",
         "string": "cpp",
         "limits": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "cctype": "cpp"
     }
 }

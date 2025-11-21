@@ -12,6 +12,7 @@
 #include <algorithm> //for transform function
 #include <iomanip>
 #include <ctime>
+#include <stdexcept>
 
 using namespace std;
 
@@ -82,32 +83,40 @@ class nerfGun
             }
     }
 
-    // void setModel()
-    // {
-    //     //only validation for if its empty
-    //     string mod;
-    //     cout << "Nerf Model:" << endl;
-        
-    //     while(true)
-    //     {
-    //         getline(cin, mod);
-            
-    //         if (mod.empty())
-    //         {
-    //             cout << "Please enter a nerf model name. " << endl;
-    //             cin.clear();
-    //             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    //         }
-    //         else
-    //         {
-    //             break;
-    //         }
-    //     }
+    //overloads
+    bool operator==(const nerfGun& gun2) const
+    {
+        return numDarts == gun2.numDarts;
+    }
 
-    //     model = mod;
-        
-        
-    // }
+
+
+    friend ostream& 
 
     
+
+    
+
+    
+};
+
+int main()
+{
+    vector<nerfGun> guns;
+
+    guns.emplace_back("Sharknado", 25, 100);
+    guns.emplace_back("Bulldozer", 50, 75);
+    guns.emplace_back("Destroyer", 30, 120);
+
+    for (const auto& gun : guns)
+    {
+        cout << "Name:" << gun.getModel() << endl;
+    }
+
+    
+
+
+    
+
+
 }
