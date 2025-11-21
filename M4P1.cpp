@@ -8,11 +8,10 @@
 #include <limits>
 #include <string>
 #include <iostream>
-#include <map>
-#include <sstream>
 #include <cctype> //for convertingg to all uppercase
 #include <algorithm> //for transform function
 #include <iomanip>
+#include <ctime>
 
 using namespace std;
 
@@ -26,46 +25,89 @@ class nerfGun
 
     public:
     //constructor
-    nerfGun(string mod, int ran, int cap, int darts)
+    nerfGun(string model, int range, int capacity)
     {
-        if (cap > 144)
+        if (capacity > 144)
         {
             throw invalid_argument("The dart capacity cannot be greater than 144. ");
         }
 
-        if (ran < 0)
-        {
-            throw invalid_argument("Range must be a positive integer. ");
-        }
+        
 
-        if (darts > cap)
-        {
-            throw invalid_argument("You do not have enough space for darts in the nerf gun chamber. ");
-        }
-        model = mod;
-        range = ran;
-        capacity = cap;
-        numDarts = darts;
+        
+        
+        numDarts = capacity;
     }
 
-    void setModel()
+    string getModel() const
     {
-        //only validation for if its empty
-        string mod;
-        cout << "Nerf Model:" << endl;
-        
-        while(true)
-        {
-            getline(cin, mod);
-            
-            if (mod.empty())
-            {
-                cout << "Please enter a nerf model name. " << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-        }
-        
-        
+        return model;
     }
+
+    int getRange()
+    {
+        return range;
+    }
+
+    int getCapacity() const
+    {
+        return capacity; 
+    }
+
+    int getDartCount()
+    {
+        return numDarts;
+    }
+
+    void reload(int quantity)
+    {
+        if ((numDarts + quantity) > capacity )
+        {
+            throw overflow_error("The capacity is not sufficient for that many darts!");
+        }
+        numDarts += quantity;
+    }
+
+    void fire()
+    {
+            if (numDarts <= 0)
+            {
+                throw underflow_error("You have no bullets to fire!");
+                
+                
+            }
+            else
+            {
+                numDarts--;
+            }
+    }
+
+    // void setModel()
+    // {
+    //     //only validation for if its empty
+    //     string mod;
+    //     cout << "Nerf Model:" << endl;
+        
+    //     while(true)
+    //     {
+    //         getline(cin, mod);
+            
+    //         if (mod.empty())
+    //         {
+    //             cout << "Please enter a nerf model name. " << endl;
+    //             cin.clear();
+    //             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //         }
+    //         else
+    //         {
+    //             break;
+    //         }
+    //     }
+
+    //     model = mod;
+        
+        
+    // }
+
+    
 }
