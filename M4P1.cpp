@@ -30,7 +30,7 @@ class nerfGun
     {
         if (capacity > 144)
         {
-            throw invalid_argument("The dart capacity cannot be greater than 144. ");
+            throw invalid_argument("The dart capacity cannot be greater than 144. \n");
         }
 
         
@@ -71,7 +71,7 @@ class nerfGun
     {
         if ((numDarts + quantity) > capacity )
         {
-            throw overflow_error("The capacity is not sufficient for that many darts!");
+            throw overflow_error("The capacity is not sufficient for that many darts! \n");
         }
         numDarts += quantity;
     }
@@ -80,7 +80,7 @@ class nerfGun
     {
             if (numDarts <= 0)
             {
-                throw underflow_error("You have no bullets to fire!");
+                throw underflow_error("You have no bullets to fire! \n");
                 
                 
             }
@@ -145,10 +145,17 @@ int main()
     guns.emplace_back("Bulldozer", 50, 75);
     guns.emplace_back("Destroyer", 30, 120);
     guns.emplace_back("Honey-moon", 40, 120);
+    guns.emplace_back("Berzerker", 10, 144);
+    guns.emplace_back("Kettle", 5, 45);
 
+    cout << "Nerf Guns Available: \n";
+    cout << "---------------------------" << endl;
+
+//initial display
     for (const auto& gun : guns)
     {
         cout  << gun;
+        cout << "----------------------------" << endl;
     }
 
     //Ask to fire
@@ -156,6 +163,7 @@ int main()
     {
 
         int fireNum;
+        int dartsFired;
         int choice;
         cout << "Would you like to fire(1), reload(2) or exit(0)?: " << endl;
         cin >> choice;
@@ -178,9 +186,11 @@ int main()
             try
             {
                 
-                //pick a random valid index and how many times it shoots the gun
+                //pick a random valid index and how many times it shoots the gun between max ammo cap and 1
                 int gunIndex = rand() % guns.size();
                 int numTimes = rand() % 144 + 1;
+                int dartCount = guns[gunIndex].getDartCount();
+                
                 fireNum = numTimes;
                 cout << "--------------------------\n";
                 cout << "Firing the " << guns[gunIndex].getModel() << " with " 
@@ -190,6 +200,9 @@ int main()
                 for (int i = 0; i < numTimes; ++i)
                 {
                     --guns[gunIndex];
+                    dartsFired++;
+                    
+
                 }
 
                 
@@ -201,7 +214,10 @@ int main()
             }
             catch(const std::exception& e)
             {
-                std::cerr << e.what() << '\n' << "Tried to fire " << fireNum << " darts!";
+                cout << "------------------------" << endl;
+                cerr << e.what() << '\n' << "Tried to fire " << fireNum << " darts! Only fired " << 
+                dartsFired << " darts. \n";
+                dartsFired = 0;
                 
             }
             
@@ -218,6 +234,7 @@ int main()
             int gunIndex = rand() % guns.size();
             cout << "Will try to reload the " << guns[gunIndex].getModel() << ". Please hold..." << endl;
             cout << guns[gunIndex];
+            //inpot validation
             while (true)
             {
                 
@@ -235,7 +252,7 @@ int main()
                 }
 
             }
-
+            //use += overload
             guns[gunIndex] += amount;
             cout << "--------------------------" << endl;
             cout << "The " << guns[gunIndex].getModel() << " has " << guns[gunIndex].getDartCount() << " darts now. " << endl;
@@ -261,17 +278,20 @@ int main()
             //Either way I just went with one like in the example because it explicity compares with a < b
             // auto maxDarts = max_element(guns.begin(), guns.end());
 
+
+
             auto maxDarts = max_element(guns.begin(), guns.end(), [](const nerfGun& gun1, const nerfGun& gun2) 
         {
-            if (gun1 < gun2)
-            {
+            
                 return gun1 < gun2;
-            }
-            else if (gun1 == gun2)
-            {
-                return gun1 == gun2;
-            }
+            
+            
         });
+
+        //get dart count of that  instance and hold it as the maximum number, later used to check with == operand for equal ammo sizes
+        int maxNum = maxDarts->getDartCount();
+
+            
             
             
             cout << "Statistics" << endl;
@@ -284,8 +304,18 @@ int main()
 
             cout << "Gun with the most ammo: " << endl;
             cout << "------------------" << endl;
-            cout << *maxDarts;
-            cout << "------------------" << endl;
+            
+            
+            
+
+            for ( auto& gun : guns )
+            {
+                if (gun.getDartCount() == maxNum)
+                {
+                    cout << gun;
+                    cout << "-------------------" << endl;
+                }
+            }
             
 
         }
