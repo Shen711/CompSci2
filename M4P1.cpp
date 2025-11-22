@@ -114,6 +114,11 @@ class nerfGun
         return *this;
     }
 
+    bool operator <(const nerfGun& othergun) const
+    {
+            return numDarts < othergun.numDarts;
+    }
+
 
     //had to copy this over from your example. I'm still  trying to wrap my head around
     //the overloading but this one has me a little lost
@@ -139,6 +144,7 @@ int main()
     guns.emplace_back("Sharknado", 25, 100);
     guns.emplace_back("Bulldozer", 50, 75);
     guns.emplace_back("Destroyer", 30, 120);
+    guns.emplace_back("Honey-moon", 40, 120);
 
     for (const auto& gun : guns)
     {
@@ -148,12 +154,14 @@ int main()
     //Ask to fire
     while(true)
     {
+
+        int fireNum;
         int choice;
         cout << "Would you like to fire(1), reload(2) or exit(0)?: " << endl;
         cin >> choice;
 
         //shoot
-        if (choice = 1)
+        if (choice == 1)
         {
             //random seed 
             srand(time(0));
@@ -172,10 +180,12 @@ int main()
                 
                 //pick a random valid index and how many times it shoots the gun
                 int gunIndex = rand() % guns.size();
-                int numTimes = rand() % guns[gunIndex].getDartCount() + 1;
+                int numTimes = rand() % 144 + 1;
+                fireNum = numTimes;
                 cout << "--------------------------\n";
                 cout << "Firing the " << guns[gunIndex].getModel() << " with " 
-                << guns[gunIndex].getDartCount() << " current darts.";
+                << guns[gunIndex].getDartCount() << " current darts." << endl;
+                cout << "-----------------------" << endl;
                 //fire it a random amount of times
                 for (int i = 0; i < numTimes; ++i)
                 {
@@ -191,23 +201,26 @@ int main()
             }
             catch(const std::exception& e)
             {
-                std::cerr << e.what() << '\n';
+                std::cerr << e.what() << '\n' << "Tried to fire " << fireNum << " darts!";
+                
             }
             
 
         }
 
         //reload
-        else if (choice = 2)
+        else if (choice == 2)
         {
-            
+            try
+            {
+                int amount;
             //pick a random valid index
             int gunIndex = rand() % guns.size();
             cout << "Will try to reload the " << guns[gunIndex].getModel() << ". Please hold..." << endl;
             cout << guns[gunIndex];
             while (true)
             {
-                int amount;
+                
                 cout << "How many darts?" << endl;
                 cin >> amount;
                 if (!cin || amount < 1)
@@ -220,13 +233,60 @@ int main()
                 {
                     break;
                 }
+
             }
+
+            guns[gunIndex] += amount;
+            cout << "--------------------------" << endl;
+            cout << "The " << guns[gunIndex].getModel() << " has " << guns[gunIndex].getDartCount() << " darts now. " << endl;
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << '\n';
+            }
+            
+            
 
         }
 
+        
+
+        
+
         //exit
         else if (choice = 3)
+
         {
+            //This is what I started with, I dont know if it follows the instructions because I dont use the < operand but maybe it does because of max?
+            //Either way I just went with one like in the example because it explicity compares with a < b
+            // auto maxDarts = max_element(guns.begin(), guns.end());
+
+            auto maxDarts = max_element(guns.begin(), guns.end(), [](const nerfGun& gun1, const nerfGun& gun2) 
+        {
+            if (gun1 < gun2)
+            {
+                return gun1 < gun2;
+            }
+            else if (gun1 == gun2)
+            {
+                return gun1 == gun2;
+            }
+        });
+            
+            
+            cout << "Statistics" << endl;
+            cout << "------------------" << endl;
+            for (const auto& gun : guns)
+            {
+                cout  << gun;
+                cout << "------------------" << endl;
+            }
+
+            cout << "Gun with the most ammo: " << endl;
+            cout << "------------------" << endl;
+            cout << *maxDarts;
+            cout << "------------------" << endl;
+            
 
         }
 
