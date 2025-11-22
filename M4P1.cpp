@@ -164,18 +164,28 @@ int main()
 
             
 
+            //I wanted to try something different from your example but still follow instructions.
+            //Yours helped me out with the structure and understanding overloading
+            //but I wanted to add some more to demonstrate I know how to do it
             try
             {
-                int numTimes = rand
-                //pick a random valid index
+                
+                //pick a random valid index and how many times it shoots the gun
                 int gunIndex = rand() % guns.size();
+                int numTimes = rand() % guns[gunIndex].getDartCount() + 1;
                 cout << "--------------------------\n";
                 cout << "Firing the " << guns[gunIndex].getModel() << " with " 
-                << guns[gunIndex].getDartCount() << "darts.";
-                //fire it 
-                --guns[gunIndex];
+                << guns[gunIndex].getDartCount() << " current darts.";
+                //fire it a random amount of times
+                for (int i = 0; i < numTimes; ++i)
+                {
+                    --guns[gunIndex];
+                }
 
-                cout << "The " << guns[gunIndex].getModel() << " has " << guns[gunIndex].getDartCount() << endl; 
+                
+
+                cout << "The " << guns[gunIndex].getModel() << " has " << guns[gunIndex].getDartCount() 
+                << " darts after firing " << numTimes << endl; 
 
 
             }
