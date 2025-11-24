@@ -150,17 +150,27 @@ int main()
     {
         cout << "Model: " << endl;
         getline(cin, model);
-        cin.ignore(, '\n');
+        
+        cout << "Range: " << endl;
+        cin >> range;
+        
+
+        cout << "Capacity (144 Max):"<< endl;
+        cin >> capacity;
+        cin.ignore(numeric_limits<streamsize>:: max(), '\n');
+
+        guns.emplace_back(model, range, capacity);
+
 
 
     }
 
-    guns.emplace_back("Sharknado", 25, 100);
-    guns.emplace_back("Bulldozer", 50, 75);
-    guns.emplace_back("Destroyer", 30, 120);
-    guns.emplace_back("Honey-moon", 40, 120);
-    guns.emplace_back("Berzerker", 10, 144);
-    guns.emplace_back("Kettle", 5, 45);
+    // guns.emplace_back("Sharknado", 25, 100);
+    // guns.emplace_back("Bulldozer", 50, 75);
+    // guns.emplace_back("Destroyer", 30, 120);
+    // guns.emplace_back("Honey-moon", 40, 120);
+    // guns.emplace_back("Berzerker", 10, 144);
+    // guns.emplace_back("Kettle", 5, 45);
 
     cout << "Nerf Guns Available: \n";
     cout << "---------------------------" << endl;
