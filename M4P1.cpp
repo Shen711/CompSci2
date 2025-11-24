@@ -139,7 +139,21 @@ class nerfGun
 
 int main()
 {
+
+    string model;
+    int range, capacity;
+
     vector<nerfGun> guns;
+
+    cout << "Create Nerf Guns: " << endl;
+    while(true)
+    {
+        cout << "Model: " << endl;
+        getline(cin, model);
+        cin.ignore(, '\n');
+
+
+    }
 
     guns.emplace_back("Sharknado", 25, 100);
     guns.emplace_back("Bulldozer", 50, 75);
