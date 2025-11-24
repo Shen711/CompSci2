@@ -1,15 +1,15 @@
-//Program Name: State Selector
+//Program Name: Nerf Gun Machine
 //Author: Nathan Schoenike
-//Date Last Updated: 11/17/2025
-//Purpose: To read files from a txt and display information for state based on input
+//Date Last Updated: 11/24/2025
+//Purpose: To create nerf guns and fire and reload them randomly
 
 #include <fstream> //for file
 #include <vector> //for assignment
 #include <limits>
 #include <string>
 #include <iostream>
-#include <cctype> //for convertingg to all uppercase
-#include <algorithm> //for transform function
+#include <cctype>
+#include <algorithm>
 #include <iomanip>
 #include <ctime>
 #include <stdexcept>
@@ -145,25 +145,57 @@ int main()
 
     vector<nerfGun> guns;
 
-    cout << "Create Nerf Guns: " << endl;
+    cout << "Nerf Gun Machine " << endl;
+    cout << "-----------------" << endl;
     while(true)
     {
-        cout << "Model: " << endl;
-        getline(cin, model);
+
+        int createChoice;
+
+        cout << "Create a nerf gun(1) or finish creating(0)? : " << endl;
+
+        cin >> createChoice;
         
-        cout << "Range: " << endl;
-        cin >> range;
+        
+        
+        if (!cin || createChoice != 0 && createChoice != 1)
+            {
+                cout << "Please enter 1 or 0. " << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>:: max(), '\n');
+
+            }
+
+            else if (createChoice == 0)
+            {
+                break;
+            }
+
+            cin.ignore(numeric_limits<streamsize>:: max(), '\n');
+
+
+            cout << "Model: " << endl;
+            getline(cin, model);
+        
+            cout << "Range: " << endl;
+            cin >> range;
         
 
-        cout << "Capacity (144 Max):"<< endl;
-        cin >> capacity;
-        cin.ignore(numeric_limits<streamsize>:: max(), '\n');
+            cout << "Capacity (144 Max):"<< endl;
+            cin >> capacity;
+             cin.ignore(numeric_limits<streamsize>:: max(), '\n');
 
-        guns.emplace_back(model, range, capacity);
+            guns.emplace_back(model, range, capacity);
+                
+        
+
+        
 
 
 
     }
+    
+    //Values for testing, no input
 
     // guns.emplace_back("Sharknado", 25, 100);
     // guns.emplace_back("Bulldozer", 50, 75);
@@ -185,11 +217,12 @@ int main()
     //Ask to fire
     while(true)
     {
-
-        int fireNum;
-        int dartsFired;
+        //Had to set these to 0 so they reset for every try
+        int fireNum = 0;
+        int dartsFired = 0;
+        
         int choice;
-        cout << "Would you like to fire(1), reload(2) or exit(0)?: " << endl;
+        cout << "Would you like to fire(1), reload(2) or see statistics and exit the program(0)?: " << endl;
         cin >> choice;
 
         //shoot
@@ -197,10 +230,7 @@ int main()
         {
             //random seed 
             srand(time(0));
-            //example
-            //a = user
-            //b = 10
-            // c = a + b
+            
 
             
 
@@ -209,6 +239,9 @@ int main()
             //but I wanted to add some more to demonstrate I know how to do it
             try
             {
+
+                fireNum = 0;
+                dartsFired = 0;
                 
                 //pick a random valid index and how many times it shoots the gun between max ammo cap and 1
                 int gunIndex = rand() % guns.size();
