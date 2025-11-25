@@ -51,7 +51,7 @@ class nerfGun
         return model;
     }
 
-    //Question: when this wasnt const program didnt work
+    //Question: when this wasnt const program didnt work, but it is not modifying anything. Just retrieving right?
     int getRange() const
     {
         return range;
@@ -108,6 +108,7 @@ class nerfGun
         return *this;
     }
 
+    //prefix operator, not sure when I was supposed to use post fix for this program because I could not think of a way to implement it since pre can do all the decrementing 
     nerfGun& operator --()
     {
         fire();
@@ -156,6 +157,9 @@ int main()
 
         cin >> createChoice;
         
+
+        
+        
         
         
         if (!cin || createChoice != 0 && createChoice != 1)
@@ -180,10 +184,27 @@ int main()
             cout << "Range: " << endl;
             cin >> range;
         
+            while(true)
+            {
+                cout << "Capacity (144 Max):"<< endl;
+                cin >> capacity;
+                cin.ignore(numeric_limits<streamsize>:: max(), '\n');
+            
+             if (capacity > 144 || capacity < 1 || !cin)
+             {
+                cout << "Error. Enter a valid capacity under 144 darts." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>:: max(), '\n');
+                continue;
 
-            cout << "Capacity (144 Max):"<< endl;
-            cin >> capacity;
-             cin.ignore(numeric_limits<streamsize>:: max(), '\n');
+             }
+             else
+             {
+                break;
+             }
+            }
+
+            
 
             guns.emplace_back(model, range, capacity);
                 
@@ -328,7 +349,7 @@ int main()
         
 
         //exit
-        else if (choice = 3)
+        else if (choice == 0)
 
         {
             //This is what I started with, I dont know if it follows the instructions because I dont use the < operand but maybe it does because of max?
@@ -374,7 +395,7 @@ int main()
                 }
             }
             
-
+            return 0;
         }
 
         
