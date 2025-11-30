@@ -22,20 +22,56 @@ class Beverage
 {
     string name;
     string description;
-    int servingSize;
+    string servingSize;
     int calories;
     float price;
 
     public:
 
 
-    Beverage(string name, string description, int servingSize, int calories, float price)  
+    Beverage(string name, string description, string servingSize, int calories, float price)  
     {
         this -> name = name;
         this -> description = description;
         this -> servingSize = servingSize;
         this -> calories = calories;
         this -> price = price;
+    }
+
+    void setSize()
+    {
+        int choice;
+        cout << "Which size (1 for small, 2 for medium, 3 for large)?: " << endl;
+        
+        while (true)
+        {
+            cin >> choice;
+
+            if (cin.fail() || choice < 1 || choice > 3)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 3: ";
+
+            }
+            else if(choice == 1)
+            {
+                servingSize = "Small";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+            else if(choice == 2)
+            {
+                servingSize = "Medium";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+            else if(choice == 3)
+            {
+                servingSize = "Large";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
     }
 
 
@@ -55,19 +91,20 @@ class Coffee : public Beverage
     static string coffeeTypes[5];
 
     public:
-    Coffee(string name, 
-        string description,
-        int servingSize,
-        int calories,
-        float price,
-        string coffeeType, 
-        string temp, 
-        string caffeine, 
-        string strength, 
-        string creamer, 
-        string sweetener) : 
+    Coffee( 
+        string description = "Default Coffee",
+        string servingSize = "Medium",
+        int calories = 100,
+        float price = 2.50,
+        string coffeeType = "Medium", 
+        string temp = "Hot", 
+        string caffeine = "Caffeinated", 
+        string strength = "Regular", 
+        string creamer = "0 Creams", 
+        string sweetener = "0 Sweeteners"
+        ) : 
         
-        Beverage(name, description, servingSize, calories, price)
+        Beverage("Coffee", description, servingSize, calories, price)
     {
         this -> coffeeType = coffeeType;
         this -> temp = temp;
@@ -77,8 +114,7 @@ class Coffee : public Beverage
         this -> sweetener = sweetener;
     }
 
-
-    void setCoffeeType()
+        void setCoffeeType()
     {
         int choice;
         cout << "Select a Roast Type: " << endl;
@@ -97,10 +133,228 @@ class Coffee : public Beverage
                 cout << "Error. Please enter a number between 1 and 5: ";
 
             }
+            else
+            {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
 
-        this -> coffeeType = coffeeType;
+       
+        }
+        
     }
-};
+
+         void setTemp()
+         {
+            int choice;
+            cout << "Temperature (1 for cold, 2 for hot):" << endl;
+            while (true)
+            {
+                cin >> choice;
+
+                if (cin.fail() || choice < 1 || choice > 2)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter 1 or 2: ";
+
+                }
+                else if(choice == 1)
+                {
+                    temp = "Cold";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+                else if(choice == 2)
+                {
+                    temp = "Hot";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+
+         }
+        }
+
+        void setCaffeine()
+         {
+            int choice;
+            cout << "Caffeine (1 for no, 2 for yes)?:" << endl;
+            while (true)
+            {
+                cin >> choice;
+
+                if (cin.fail() || choice < 1 || choice > 2)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter 1 or 2: ";
+
+                }
+                else if(choice == 1)
+                {
+                    caffeine = "Decaf";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+                else if(choice == 2)
+                {
+                    caffeine = "Ceffeinated";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+
+         }
+        }
+
+        void setStrength()
+         {
+            int choice;
+            cout << "Strength (1 for weak, 2 for average, 3 for strong)?:" << endl;
+            while (true)
+            {
+                cin >> choice;
+
+                if (cin.fail() || choice < 1 || choice > 3)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter a number between 1 and 3: ";
+
+                }
+                else if(choice == 1)
+                {
+                    strength = "Weak";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+                else if(choice == 2)
+                {
+                    strength = "Regular";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+                else if(choice == 3)
+                {
+                    strength = "Strong";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+
+         }
+        }
+
+        void setCreamer()
+        {
+            int cchoice;
+            cout << "How many creamers? (Max 5):" << endl;
+
+            while (true)
+            {
+                cin >> cchoice;
+
+                if (cin.fail() || cchoice < 0 || cchoice > 5)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter a number between 0 and 5: ";
+
+                }
+                else
+                {
+                    creamer = to_string(cchoice) + " Creams";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+            
+        }
+    }
+    void setSweetener()
+        {
+            int schoice;
+            cout << "How many sweeteners? (Max 5):" << endl;
+
+            while (true)
+            {
+                cin >> schoice;
+
+                if (cin.fail() || schoice < 0 || schoice > 5)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter a number between 0 and 5: ";
+
+                }
+                else
+                {
+                    sweetener = to_string(schoice) + " Sweeteners";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+            
+        }
+    }
+
+            string getDetails()
+            {
+                return 
+                ( "Coffee Type: " + coffeeType + '\n' + 
+                 "Temperature: " + temp + '\n' +
+                 "Caffeine: " + caffeine + '\n' +
+                 "Strength: " + strength + '\n'
+                 + "Creamer: " + creamer + '\n' 
+                 + "Sweetener: " + sweetener + '\n');
+            }
+        
+
+
+    };
+
+
+
 
 //array initizalization
 string Coffee::coffeeTypes[5] = {"Light", "Medium", "Dark", "French Roast", "Espresso"};
+
+
+int main()
+{
+    int choice;
+    cout << "Drink Order System" << endl;
+    cout << "---------------------------------" << endl;
+    cout << "Pick a drink with corresponding number." << endl;
+
+    while (true)
+    {
+        
+        cout << "Drink Menu:" <<endl;
+        cout << "1. Coffee" << endl;
+        cout << "2. Exit" << endl;
+
+        cin >> choice;
+        if (cin.fail() || choice < 1 || choice > 2)
+         {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Error. Please enter 1 or 2: ";
+
+        }
+        else if(choice == 1)
+        {
+            Coffee myCoffee("Default Coffee", "Default Description", 12, 5, 2.50, "Default", "Default", "Default", "Default", "Default", "Default");
+            myCoffee.setCoffeeType();
+            myCoffee.setTemp();
+            myCoffee.setCaffeine();
+            myCoffee.setStrength();
+            myCoffee.setCreamer();
+            myCoffee.setSweetener();
+
+            cout << "Your Coffee Details:" << endl;
+            myCoffee.getDetails();
+        }
+        else if(choice == 2)
+        {
+            cout << "Exiting program." << endl;
+            break;
+        }
+    }
+};
