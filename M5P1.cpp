@@ -52,11 +52,22 @@ class Coffee : public Beverage
     string creamer;
     string sweetener;
 
+    static string coffeeTypes[5];
+
     public:
     Coffee(string name, 
         string description,
-        int servingSize;
-        string coffeeType, string temp, string caffeine, string strength, string creamer, string sweetener) : Beverage(name, description, servingSize, calories, price)
+        int servingSize,
+        int calories,
+        float price,
+        string coffeeType, 
+        string temp, 
+        string caffeine, 
+        string strength, 
+        string creamer, 
+        string sweetener) : 
+        
+        Beverage(name, description, servingSize, calories, price)
     {
         this -> coffeeType = coffeeType;
         this -> temp = temp;
@@ -66,4 +77,30 @@ class Coffee : public Beverage
         this -> sweetener = sweetener;
     }
 
+
+    void setCoffeeType()
+    {
+        int choice;
+        cout << "Select a Roast Type: " << endl;
+        cout << "1. Light" << endl;
+        cout << "2. Medium" << endl;
+        cout << "3. Dark" << endl;
+        cout << "4. French Roast" << endl;
+        cout << "5. Espresso" << endl;
+        while (true)
+        {
+            cin >> choice;
+            if (cin.fail() || choice < 1 || choice > 5)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 5: ";
+
+            }
+
+        this -> coffeeType = coffeeType;
+    }
 };
+
+//array initizalization
+string Coffee::coffeeTypes[5] = {"Light", "Medium", "Dark", "French Roast", "Espresso"};
