@@ -84,7 +84,7 @@ void getDrinkDesc()
     {
                 cout << "Name: " << name << endl;
                 cout << "Size: " << servingSize << '\n' <<
-                 "Price: $" << to_string(price) << '\n' <<
+                 "Price: $" << fixed << setprecision(2) << to_string(price) << '\n' <<
                  "Calories: " << to_string(calories) << " cal" << '\n' <<
                  "Description: " << endl;
                  cout <<"-----------------\n" <<  description << endl;
@@ -106,6 +106,7 @@ class Coffee : public Beverage
     static string coffeeTypes[5];
 
     public:
+    
     Coffee(
         string description = "",
         string servingSize = "Medium",
@@ -331,11 +332,175 @@ class Coffee : public Beverage
 
     };
 
+class Tea : public Beverage
+{
+    string teaType;
+    string temp;
+    string creamer;
+    string sweetener;
+    string lemon;
+
+    public: 
+
+    static string teaTypes[5];
+    Tea(
+        string description = "",
+        string servingSize = "Medium",
+        int calories = 50,
+        float price = 2.00,
+        string teaType = "Black", 
+        string temp = "Hot", 
+        string creamer = "0 Creams", 
+        string sweetener = "0 Sweeteners",
+        string lemon = "No Lemon"
+        ) : 
+        
+        Beverage("Tea", description, servingSize, calories, price)
+    {
+        this -> teaType = teaType;
+        this -> temp = temp;
+        this -> creamer = creamer;
+        this -> sweetener = sweetener;
+        this -> lemon = lemon;
+
+        this -> description = getDetails();
+    }
+
+    void setTeaType()
+    {
+        int choice;
+        cout << "Select a Roast Type: " << endl;
+        cout << "1. Black" << endl;
+        cout << "2. Oolong" << endl;
+        cout << "3. Herbal" << endl;
+        cout << "4. Chamomille" << endl;
+        
+        while (true)
+        {
+            cin >> choice;
+            if (cin.fail() || choice < 1 || choice > 4)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 5: ";
+
+            }
+            else
+            {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+
+       
+        }
+        
+        teaType = teaTypes[choice - 1];
+        
+    }
+
+    void setCreamer()
+        {
+            int cchoice;
+            cout << "How many creamers? (Max 5):" << endl;
+
+            while (true)
+            {
+                cin >> cchoice;
+
+                if (cin.fail() || cchoice < 0 || cchoice > 5)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter a number between 0 and 5: ";
+
+                }
+                else
+                {
+                    creamer = to_string(cchoice) + " Creams";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+            
+            }
+        }
+        void setSweetener()
+        {
+            int schoice;
+            cout << "How many sweeteners? (Max 5):" << endl;
+
+            while (true)
+            {
+                cin >> schoice;
+
+                if (cin.fail() || schoice < 0 || schoice > 5)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter a number between 0 and 5: ";
+
+                }
+                else
+                {
+                    sweetener = to_string(schoice) + " Sweeteners";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+            
+            }
+        }
+
+        void setLemon()
+        {
+            int choice;
+            cout << "Lemon (1 for no, 2 for yes)?:" << endl;
+            while (true)
+            {
+                cin >> choice;
+
+                if (cin.fail() || choice < 1 || choice > 2)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter 1 or 2: ";
+
+                }
+                else if(choice == 1)
+                {
+                    lemon = "No Lemon";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+                else if(choice == 2)
+                {
+                    lemon = "With Lemon";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+
+            }
+        }
+            void setDescription()
+            {
+                this -> description = getDetails();
+            }
+
+            string getDetails()
+            {
+                return 
+                ( "Type: " + teaType + '\n' + 
+                 "Temperature: " + temp + '\n' +
+                 + "Creamer: " + creamer + '\n' 
+                 + "Sweetener: " + sweetener + '\n' +
+                 + "Lemon: " + lemon + '\n');
+            }
+};
+
 
 
 
 //array initizalization
 string Coffee::coffeeTypes[5] = {"Light", "Medium", "Dark", "French Roast", "Espresso"};
+string Tea::teaTypes[5] = {"Black", "Green", "Oolong", "White", "Herbal"};
 
 
 int main()
@@ -351,10 +516,13 @@ int main()
         
         cout << "Drink Menu:" <<endl;
         cout << "1. Coffee" << endl;
-        cout << "2. Exit" << endl;
+        cout << "2. Tea" << endl;
+        cout << "3. Tea" << endl;
+        cout << "4. Energy Drink" << endl;
+        cout << "5. Exit" << endl;
 
         cin >> choice;
-        if (cin.fail() || choice < 1 || choice > 2)
+        if (cin.fail() || choice < 1 || choice > 5)
          {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -377,12 +545,30 @@ int main()
             cout << "Your Coffee Details:" << endl;
             myCoffee.getDrinkDesc();
             drinkOrders.push_back(new Coffee(myCoffee));
+            continue;
             
         }
         else if(choice == 2)
         {
-            cout << "Exiting program." << endl;
-            break;
+            Tea myTea;
+
+            myTea.setSize();
+            myTea.setCreamer();
+            myTea.setSweetener();
+            myTea.setDescription();
+            cout << "Your Tea Details:" << endl;
+            myTea.getDrinkDesc();
+            drinkOrders.push_back(new Tea(myTea));
+            continue;
+        }
+        else if (choice == 5)
+        {
+            for (int i = 0; i < drinkOrders.size(); i++)
+            {
+                drinkOrders[i] -> getDrinkDesc();
+                
+            
+            }
         }
     }
-}
+};
