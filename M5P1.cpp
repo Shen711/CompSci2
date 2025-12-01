@@ -1,7 +1,7 @@
 //Program Name: Beverage Class
 //Author: Nathan Schoenike
-//Date Last Updated: 11/26/2025
-//Purpose: To create nerf guns and fire and reload them randomly
+//Date Last Updated: 12/1/2025
+//Purpose: To have a beverage ordering system using inheritance
 #include <iostream>
 #include <fstream> //for file
 #include <vector> //for assignment
@@ -39,6 +39,8 @@ class Beverage
         this -> price = price;
     }
 
+    //Had this initially but I figured different drinks have different calorie and 
+    //price changes based on size so I did it for subclasses seperately
     // void setSize()
     // {
     //     int choice;
@@ -82,7 +84,7 @@ class Beverage
         
 
         //my toString method, will rename 
-void getDrinkDesc()
+void toString()
     {
         
                 cout << "Name: " << name << endl;
@@ -633,6 +635,220 @@ class Tea : public Beverage
             }
 };
 
+//Energy Drink class
+class EnergyDrink : public Beverage
+{
+    string brand;
+    string stimulant;
+    string sweetener;
+    
+
+    public: 
+
+    static string energyBrands[5];
+    EnergyDrink(
+        string description = "",
+        string servingSize = "Medium",
+        int calories = 250,
+        float price = 3.00,
+        string stimulant = "Caffeine", 
+        string brand = "Monster", 
+        string sweetener = "No Sweeteners"
+    ) : 
+        
+        Beverage("Energy Drink", description, servingSize, calories, price)
+    {
+        this ->  stimulant = stimulant;
+        this -> brand = brand;
+        this -> sweetener = sweetener;
+        
+
+        this -> description = getDetails();
+    }
+
+    void setSize()
+    {
+        int choice;
+        cout << "Which size (1 for small, 2 for medium, 3 for large)?: " << endl;
+        
+        while (true)
+        {
+            cin >> choice;
+
+            if (cin.fail() || choice < 1 || choice > 3)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 3: ";
+
+            }
+            else if(choice == 1)
+            {
+                servingSize = "Small";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                //Price stays same for small
+                break;
+            }
+            else if(choice == 2)
+            {
+                servingSize = "Medium";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                price += 1.00;
+                calories += 140;
+                break;
+            }
+            else if(choice == 3)
+            {
+                servingSize = "Large";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                price += 2.00;
+                calories += 300;
+                break;
+            }
+    }
+}
+
+    void setEnergyBrand()
+    {
+        int choice;
+        cout << "Select a Soda Brand: " << endl;
+        cout << "1. Monster" << endl;
+        cout << "2. Red Bull" << endl;
+        cout << "3. Rockstar" << endl;
+        cout << "4. Bang" << endl;
+        cout << "5. 5 Hour Energy" << endl;
+        
+        while (true)
+        {
+            cin >> choice;
+            if (cin.fail() || choice < 1 || choice > 5)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 5: ";
+
+            }
+            else
+            {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+
+       
+        }
+        
+        brand = energyBrands[choice - 1];
+        
+    }
+
+        void setStimulantType()
+    {
+        int choice;
+        cout << "Select a Stimulant Type: " << endl;
+        cout << "1. Caffeine" << endl;
+        cout << "2. Taurine" << endl;
+        cout << "3. Caffeine and Taurine" << endl;
+        cout << "4. No Stimulant" << endl;
+        
+        
+        
+        while (true)
+        {
+
+            //Just did it all manually instead of making an array, less options than the 
+            //other subclasses
+            cin >> choice;
+            if (cin.fail() || choice < 1 || choice > 5)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 5: ";
+
+            }
+            else if (choice == 1)
+            {
+                stimulant = "Caffeine";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+            else if (choice == 2)
+            {
+                stimulant = "Taurine";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+            else if (choice == 3)
+            {
+                stimulant = "Caffeine and Taurine";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                price += 1.00;
+                break;
+            }
+            else if (choice == 4)
+            {
+                stimulant = "No Stimulant";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                price -= 0.50;
+                break;
+            }
+            else
+            {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+
+       
+        }
+        
+        
+        
+    }
+
+            void setSweetener()
+        {
+            int schoice;
+            cout << "How many sweeteners? (Max 5):" << endl;
+
+            while (true)
+            {
+                cin >> schoice;
+
+                if (cin.fail() || schoice < 0 || schoice > 5)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter a number between 0 and 5: ";
+
+                }
+                else
+                {
+                    sweetener = to_string(schoice) + " Sweeteners";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    calories = calories + (schoice * 15); //each sweetener is 15 calories
+                    break;
+                }
+            
+        }
+    }
+
+
+
+
+            void setDescription()
+            {
+                this -> description = getDetails();
+            }
+
+            string getDetails()
+            {
+                //returns a string that is more of a sentence 
+                return 
+                ( stimulant + " " + brand + 
+                 " energy drink with  " + sweetener + '\n'
+                 );
+            }
+};
+
 //Soda class
 class Soda : public Beverage
 {
@@ -832,6 +1048,7 @@ string Coffee::coffeeTypes[5] = {"Light", "Medium", "Dark", "French Roast", "Esp
 string Tea::teaTypes[5] = {"Black", "Green", "Oolong", "Chamomille", "Special"};
 string Soda::sodaBrands[5] = {"Coke", "Sprite", "Dr. Pepper", "Root Beer", "RC"};
 string Soda::flavorTypes[5] = {"Original", "Cherry", "Vanilla", "Lemon", "Grape"};
+string EnergyDrink::energyBrands[5] = {"Monster", "Red Bull", "Rockstar", "Bang", "5 Hour Energy"};
 
 
 int main()
@@ -862,6 +1079,7 @@ int main()
             cout << "Error. Please enter 1 or 2: ";
 
         }
+        //Coffee
         else if(choice == 1)
         {
             Coffee myCoffee;
@@ -876,11 +1094,12 @@ int main()
             myCoffee.setDescription();
 
             cout << "Your Coffee Details:" << endl;
-            myCoffee.getDrinkDesc();
+            myCoffee.toString();
             drinkOrders.push_back(new Coffee(myCoffee));
             continue;
             
         }
+        //Tea
         else if(choice == 2)
         {
             Tea myTea;
@@ -896,10 +1115,11 @@ int main()
             //it updates with the new data
             myTea.setDescription();
             cout << "Your Tea Details:" << endl;
-            myTea.getDrinkDesc();
+            myTea.toString();
             drinkOrders.push_back(new Tea(myTea));
             continue;
         }
+        //Soda
         else if (choice == 3)
         {
             Soda mySoda;
@@ -912,10 +1132,28 @@ int main()
             mySoda.setDescription();
 
             cout << "Your Soda Details:" << endl;
-            mySoda.getDrinkDesc();
+            mySoda.toString();
             drinkOrders.push_back(new Soda(mySoda));
             continue;
         }
+        //Energy drink
+        else if (choice == 4)
+        {
+            EnergyDrink myEnergyDrink;
+
+            myEnergyDrink.setSize();
+            myEnergyDrink.setEnergyBrand();
+            myEnergyDrink.setStimulantType();
+            myEnergyDrink.setSweetener();
+
+            myEnergyDrink.setDescription();
+
+            cout << "Your Energy Drink Details:" << endl;
+            myEnergyDrink.toString();
+            drinkOrders.push_back(new EnergyDrink(myEnergyDrink));
+            continue;
+        }
+        //End program and show summary of orders
         else if (choice == 5)
         {
 
@@ -925,10 +1163,13 @@ int main()
             {
                 
                 cout << "\nOrder " << (i + 1) << " Details:" << endl;
-                drinkOrders[i] -> getDrinkDesc();
+                drinkOrders[i] -> toString();
                 
             
             }
+            cout << "\nHave a good day!" << endl;
+
+            return 0;
         }
     }
 };
