@@ -39,52 +39,55 @@ class Beverage
         this -> price = price;
     }
 
-    void setSize()
-    {
-        int choice;
-        cout << "Which size (1 for small, 2 for medium, 3 for large)?: " << endl;
+    // void setSize()
+    // {
+    //     int choice;
+    //     cout << "Which size (1 for small, 2 for medium, 3 for large)?: " << endl;
         
-        while (true)
-        {
-            cin >> choice;
+    //     while (true)
+    //     {
+    //         cin >> choice;
 
-            if (cin.fail() || choice < 1 || choice > 3)
-             {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "Error. Please enter a number between 1 and 3: ";
+    //         if (cin.fail() || choice < 1 || choice > 3)
+    //          {
+    //             cin.clear();
+    //             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //             cout << "Error. Please enter a number between 1 and 3: ";
 
-            }
-            else if(choice == 1)
-            {
-                servingSize = "Small";
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                break;
-            }
-            else if(choice == 2)
-            {
-                servingSize = "Medium";
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                break;
-            }
-            else if(choice == 3)
-            {
-                servingSize = "Large";
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                break;
-            }
-    }
+    //         }
+    //         else if(choice == 1)
+    //         {
+    //             servingSize = "Small";
+    //             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //             break;
+    //         }
+    //         else if(choice == 2)
+    //         {
+    //             servingSize = "Medium";
+    //             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    //             break;
+    //         }
+    //         else if(choice == 3)
+    //         {
+    //             servingSize = "Large";
+    //             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //             break;
+    //         }
+    // }
 
     
 
 
-        }
+        
 
+        //my toString method, will rename 
 void getDrinkDesc()
     {
+        
                 cout << "Name: " << name << endl;
                 cout << "Size: " << servingSize << '\n' <<
-                 "Price: $" << fixed << setprecision(2) << to_string(price) << '\n' <<
+                 "Price: $" << fixed << setprecision(2) << price << '\n' <<
                  "Calories: " << to_string(calories) << " cal" << '\n' <<
                  "Description: " << endl;
                  cout <<"-----------------\n" <<  description << endl;
@@ -95,7 +98,7 @@ void getDrinkDesc()
 //Sub-Class
 class Coffee : public Beverage
 {
-    //has to be static if in class
+    
     string coffeeType;
     string temp;
     string caffeine;
@@ -133,6 +136,51 @@ class Coffee : public Beverage
         this -> description = getDetails();
     }
 
+
+    //setters, struggled with coffeeType but now that its done I will use about the same 
+    //structure for other subclasses and methods
+void setSize()
+    {
+        int choice;
+        cout << "Which size (1 for small, 2 for medium, 3 for large)?: " << endl;
+        
+        while (true)
+        {
+            cin >> choice;
+
+            if (cin.fail() || choice < 1 || choice > 3)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 3: ";
+
+            }
+            else if(choice == 1)
+            {
+                servingSize = "Small";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                //Price stays same for small
+                break;
+            }
+            else if(choice == 2)
+            {
+                servingSize = "Medium";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                price += 0.50;
+                calories += 30;
+                
+                break;
+            }
+            else if(choice == 3)
+            {
+                servingSize = "Large";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                price += 1.05;
+                calories += 70;
+                break;
+            }
+    }
+}
         void setCoffeeType()
     {
         int choice;
@@ -160,6 +208,8 @@ class Coffee : public Beverage
 
        
         }
+
+        coffeeType = coffeeTypes[choice - 1];
         
     }
 
@@ -213,12 +263,15 @@ class Coffee : public Beverage
                 {
                     caffeine = "Decaf";
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                     //decaf costs less
                     break;
                 }
                 else if(choice == 2)
                 {
                     caffeine = "Caffeinated";
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    price += 0.25;
+                    calories += 10;
                     break;
                 }
 
@@ -256,6 +309,7 @@ class Coffee : public Beverage
                 {
                     strength = "Strong";
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    price += 0.25;
                     break;
                 }
 
@@ -282,6 +336,7 @@ class Coffee : public Beverage
                 {
                     creamer = to_string(cchoice) + " Creams";
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    calories = calories + (cchoice * 10); //each creamer is 10 calories
                     break;
                 }
             
@@ -307,11 +362,16 @@ class Coffee : public Beverage
                 {
                     sweetener = to_string(schoice) + " Sweeteners";
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    calories = calories + (schoice * 15); //each sweetener is 15 calories
                     break;
                 }
             
         }
     }
+
+        //Need to get details from each specific subclass so I will have the subclass
+        //attributes represented as the description, each subclass specific getDetails will
+        //be slightly different in what it represents. Its one big string though
             void setDescription()
             {
                 this -> description = getDetails();
@@ -366,19 +426,62 @@ class Tea : public Beverage
         this -> description = getDetails();
     }
 
+    void setSize()
+    {
+        int choice;
+        cout << "Which size (1 for small, 2 for medium, 3 for large)?: " << endl;
+        
+        while (true)
+        {
+            cin >> choice;
+
+            if (cin.fail() || choice < 1 || choice > 3)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 3: ";
+
+            }
+            else if(choice == 1)
+            {
+                servingSize = "Small";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                //Price stays same for small
+                break;
+            }
+            else if(choice == 2)
+            {
+                servingSize = "Medium";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                price += 0.50;
+                calories += 30;
+                break;
+            }
+            else if(choice == 3)
+            {
+                servingSize = "Large";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                price += 1.05;
+                calories += 60;
+                break;
+            }
+    }
+}
+
     void setTeaType()
     {
         int choice;
         cout << "Select a Roast Type: " << endl;
         cout << "1. Black" << endl;
-        cout << "2. Oolong" << endl;
-        cout << "3. Herbal" << endl;
+        cout << "2. Green" << endl;
+        cout << "3. Oolong" << endl;
         cout << "4. Chamomille" << endl;
+        cout << "5. Special" << endl;
         
         while (true)
         {
             cin >> choice;
-            if (cin.fail() || choice < 1 || choice > 4)
+            if (cin.fail() || choice < 1 || choice > 5)
              {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -397,6 +500,37 @@ class Tea : public Beverage
         teaType = teaTypes[choice - 1];
         
     }
+
+    void setTemp()
+         {
+            int choice;
+            cout << "Temperature (1 for cold, 2 for hot):" << endl;
+            while (true)
+            {
+                cin >> choice;
+
+                if (cin.fail() || choice < 1 || choice > 2)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter 1 or 2: ";
+
+                }
+                else if(choice == 1)
+                {
+                    temp = "Cold";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+                else if(choice == 2)
+                {
+                    temp = "Hot";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+
+         }
+        }
 
     void setCreamer()
         {
@@ -417,6 +551,7 @@ class Tea : public Beverage
                 else
                 {
                     creamer = to_string(cchoice) + " Creams";
+                    calories = calories + (cchoice * 10); //each creamer is 10 calories
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     break;
                 }
@@ -443,6 +578,7 @@ class Tea : public Beverage
                 {
                     sweetener = to_string(schoice) + " Sweeteners";
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    calories = calories + (schoice * 15); //each sweetener is 15 calories
                     break;
                 }
             
@@ -474,6 +610,8 @@ class Tea : public Beverage
                 {
                     lemon = "With Lemon";
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    price += 0.05;
+                    calories += 5;
                     break;
                 }
 
@@ -500,11 +638,13 @@ class Tea : public Beverage
 
 //array initizalization
 string Coffee::coffeeTypes[5] = {"Light", "Medium", "Dark", "French Roast", "Espresso"};
-string Tea::teaTypes[5] = {"Black", "Green", "Oolong", "White", "Herbal"};
+string Tea::teaTypes[5] = {"Black", "Green", "Oolong", "Chamomille", "Special"};
 
 
 int main()
 {
+
+    // Vector which holds pointers to Beverage objects
     vector <Beverage*> drinkOrders;
     int choice;
     cout << "Drink Order System" << endl;
@@ -517,7 +657,7 @@ int main()
         cout << "Drink Menu:" <<endl;
         cout << "1. Coffee" << endl;
         cout << "2. Tea" << endl;
-        cout << "3. Tea" << endl;
+        cout << "3. Soda" << endl;
         cout << "4. Energy Drink" << endl;
         cout << "5. Exit" << endl;
 
@@ -553,8 +693,14 @@ int main()
             Tea myTea;
 
             myTea.setSize();
+            myTea.setTeaType();
+            myTea.setTemp();
             myTea.setCreamer();
             myTea.setSweetener();
+            myTea.setLemon();
+
+            //After I get all subclass specific attributes set, I set the description so
+            //it updates with the new data
             myTea.setDescription();
             cout << "Your Tea Details:" << endl;
             myTea.getDrinkDesc();
@@ -563,8 +709,13 @@ int main()
         }
         else if (choice == 5)
         {
+
+            cout << "Order Summary:" << endl;
+            cout << "--------------------------" << endl;
             for (int i = 0; i < drinkOrders.size(); i++)
             {
+                
+                cout << "\nOrder " << (i + 1) << " Details:" << endl;
                 drinkOrders[i] -> getDrinkDesc();
                 
             
