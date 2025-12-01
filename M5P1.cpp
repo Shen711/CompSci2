@@ -633,12 +633,205 @@ class Tea : public Beverage
             }
 };
 
+//Soda class
+class Soda : public Beverage
+{
+    string brand;
+    string flavorType;
+    string dietStatus;
+    
+
+    public: 
+
+    static string flavorTypes[5];
+    static string sodaBrands[5];
+    Soda(
+        string description = "",
+        string servingSize = "Medium",
+        int calories = 200,
+        float price = 3.00,
+        string flavorType = "Normal", 
+        string brand = "Coke", 
+        string dietStatus = "Non-diet"
+    ) : 
+        
+        Beverage("Soda", description, servingSize, calories, price)
+    {
+        this ->  flavorType = flavorType;
+        this -> brand = brand;
+        this -> dietStatus = dietStatus;
+        
+
+        this -> description = getDetails();
+    }
+
+    void setSize()
+    {
+        int choice;
+        cout << "Which size (1 for small, 2 for medium, 3 for large)?: " << endl;
+        
+        while (true)
+        {
+            cin >> choice;
+
+            if (cin.fail() || choice < 1 || choice > 3)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 3: ";
+
+            }
+            else if(choice == 1)
+            {
+                servingSize = "Small";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                //Price stays same for small
+                break;
+            }
+            else if(choice == 2)
+            {
+                servingSize = "Medium";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                price += 0.50;
+                calories += 120;
+                break;
+            }
+            else if(choice == 3)
+            {
+                servingSize = "Large";
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                price += 1.00;
+                calories += 240;
+                break;
+            }
+    }
+}
+
+    void setSodaBrand()
+    {
+        int choice;
+        cout << "Select a Soda Brand: " << endl;
+        cout << "1. Coke" << endl;
+        cout << "2. Sprite" << endl;
+        cout << "3. Dr. Pepper" << endl;
+        cout << "4. Root Beer" << endl;
+        cout << "5. RC" << endl;
+        
+        while (true)
+        {
+            cin >> choice;
+            if (cin.fail() || choice < 1 || choice > 5)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 5: ";
+
+            }
+            else
+            {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+
+       
+        }
+        
+        brand = sodaBrands[choice - 1];
+        
+    }
+
+        void setFlavorType()
+    {
+        int choice;
+        cout << "Select a soda flavor: " << endl;
+        cout << "1. Original" << endl;
+        cout << "2. Cherry" << endl;
+        cout << "3. Vanilla" << endl;
+        cout << "4. Lemon" << endl;
+        cout << "5. Grape" << endl;
+        
+        
+        while (true)
+        {
+            cin >> choice;
+            if (cin.fail() || choice < 1 || choice > 5)
+             {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter a number between 1 and 5: ";
+
+            }
+            else
+            {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+
+       
+        }
+        
+        flavorType = flavorTypes[choice - 1];
+        
+    }
+
+    //was able to repurpose setLemon into setDietStatus
+            void setDietStatus()
+        {
+            int choice;
+            cout << "Diet (1 for no, 2 for yes)?:" << endl;
+            while (true)
+            {
+                cin >> choice;
+
+                if (cin.fail() || choice < 1 || choice > 2)
+                 {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Error. Please enter 1 or 2: ";
+
+                }
+                //Prices are same for non diet and diet
+                else if(choice == 1)
+                {
+                    dietStatus = "Non-diet";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
+                }
+                else if(choice == 2)
+                {
+                    dietStatus = "Diet";
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    
+                    calories -= 100;
+                    break;
+                }
+
+            }
+        }
+
+
+            void setDescription()
+            {
+                this -> description = getDetails();
+            }
+
+            string getDetails()
+            {
+                //returns a string that is more of a sentence 
+                return 
+                ( dietStatus + " " + flavorType + 
+                 " " + brand + " soda" + '\n'
+                 );
+            }
+};
 
 
 
 //array initizalization
 string Coffee::coffeeTypes[5] = {"Light", "Medium", "Dark", "French Roast", "Espresso"};
 string Tea::teaTypes[5] = {"Black", "Green", "Oolong", "Chamomille", "Special"};
+string Soda::sodaBrands[5] = {"Coke", "Sprite", "Dr. Pepper", "Root Beer", "RC"};
+string Soda::flavorTypes[5] = {"Original", "Cherry", "Vanilla", "Lemon", "Grape"};
 
 
 int main()
@@ -705,6 +898,22 @@ int main()
             cout << "Your Tea Details:" << endl;
             myTea.getDrinkDesc();
             drinkOrders.push_back(new Tea(myTea));
+            continue;
+        }
+        else if (choice == 3)
+        {
+            Soda mySoda;
+
+            mySoda.setSize();
+            mySoda.setSodaBrand();
+            mySoda.setFlavorType();
+            mySoda.setDietStatus();
+
+            mySoda.setDescription();
+
+            cout << "Your Soda Details:" << endl;
+            mySoda.getDrinkDesc();
+            drinkOrders.push_back(new Soda(mySoda));
             continue;
         }
         else if (choice == 5)
