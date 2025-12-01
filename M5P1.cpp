@@ -20,6 +20,7 @@ using namespace std;
 
 class Beverage
 {
+    protected:
     string name;
     string description;
     string servingSize;
@@ -74,7 +75,21 @@ class Beverage
             }
     }
 
+    
 
+
+        }
+
+void getDrinkDesc()
+    {
+                cout << "Name: " << name << endl;
+                cout << "Size: " << servingSize << '\n' <<
+                 "Price: $" << to_string(price) << '\n' <<
+                 "Calories: " << to_string(calories) << " cal" << '\n' <<
+                 "Description: " << endl;
+                 cout <<"-----------------\n" <<  description << endl;
+    }
+    
 };
 
 //Sub-Class
@@ -91,8 +106,8 @@ class Coffee : public Beverage
     static string coffeeTypes[5];
 
     public:
-    Coffee( 
-        string description = "Default Coffee",
+    Coffee(
+        string description = "",
         string servingSize = "Medium",
         int calories = 100,
         float price = 2.50,
@@ -112,6 +127,9 @@ class Coffee : public Beverage
         this -> strength = strength;
         this -> creamer = creamer;
         this -> sweetener = sweetener;
+
+        //I wanted to find a way to do this without having a description setter, so I found how to use protected
+        this -> description = getDetails();
     }
 
         void setCoffeeType()
@@ -198,7 +216,7 @@ class Coffee : public Beverage
                 }
                 else if(choice == 2)
                 {
-                    caffeine = "Ceffeinated";
+                    caffeine = "Caffeinated";
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     break;
                 }
@@ -293,6 +311,10 @@ class Coffee : public Beverage
             
         }
     }
+            void setDescription()
+            {
+                this -> description = getDetails();
+            }
 
             string getDetails()
             {
@@ -318,6 +340,7 @@ string Coffee::coffeeTypes[5] = {"Light", "Medium", "Dark", "French Roast", "Esp
 
 int main()
 {
+    vector <Beverage*> drinkOrders;
     int choice;
     cout << "Drink Order System" << endl;
     cout << "---------------------------------" << endl;
@@ -340,7 +363,8 @@ int main()
         }
         else if(choice == 1)
         {
-            Coffee myCoffee("Default Coffee", "Default Description", 12, 5, 2.50, "Default", "Default", "Default", "Default", "Default", "Default");
+            Coffee myCoffee;
+            myCoffee.setSize();
             myCoffee.setCoffeeType();
             myCoffee.setTemp();
             myCoffee.setCaffeine();
@@ -348,8 +372,12 @@ int main()
             myCoffee.setCreamer();
             myCoffee.setSweetener();
 
+            myCoffee.setDescription();
+
             cout << "Your Coffee Details:" << endl;
-            myCoffee.getDetails();
+            myCoffee.getDrinkDesc();
+            drinkOrders.push_back(new Coffee(myCoffee));
+            
         }
         else if(choice == 2)
         {
@@ -357,4 +385,4 @@ int main()
             break;
         }
     }
-};
+}
