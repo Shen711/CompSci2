@@ -374,11 +374,12 @@ void setSize()
         //Need to get details from each specific subclass so I will have the subclass
         //attributes represented as the description, each subclass specific getDetails will
         //be slightly different in what it represents. Its one big string though
+    
             void setDescription()
             {
                 this -> description = getDetails();
             }
-
+            //This is basically my getter but except it is for all of my subclass variables
             string getDetails()
             {
                 return 
