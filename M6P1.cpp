@@ -48,7 +48,7 @@ class Player
     }
 };
 
-//Sub class
+//Sub classes for offense
 class QB : public Player
 {
     public: 
@@ -102,6 +102,275 @@ class WR : public Player
 
 };
 
+class TE : public Player
+{
+    public: 
+    TE(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Tight End: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Tight End";
+    }
+
+    string play() override
+    {
+        return "Blocks and catches the ball";
+    }
+
+};
+
+class RB : public Player
+{
+    public: 
+    RB(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Running Back Name: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Running Back";
+    }
+
+    string play() override
+    {
+        return "Runs with the ball";
+    }
+
+};
+
+class OL : public Player
+{
+    public: 
+    OL(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Offensive Lineman Name: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Offensive Linemain";
+    }
+
+    string play() override
+    {
+        return "Protects the quarterback";
+    }
+
+};
+
+//Defensive Teams
+
+class DL : public Player
+{
+    public: 
+DL(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Defensive Lineman Name: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Defensive Lineman";
+    }
+
+    string play() override
+    {
+        return "Tries to sack the quarterback";
+    }
+
+};
+
+class LB : public Player
+{
+    public: 
+LB(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Defensive Lineman Name: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Linebacker";
+    }
+
+    string play() override
+    {
+        return "Tries to sack the quarterback and stop the run/pass";
+    }
+
+};
+
+class DB : public Player
+{
+    public: 
+DB(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Defensive Back Name: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Defensive Back";
+    }
+
+    string play() override
+    {
+        return "Tries to stop the receivers from catching passes";
+    }
+
+};
+
+
+//The special team player types
+class K : public Player
+{
+    public: 
+K(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Kicker Name: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Kicker";
+    }
+
+    string play() override
+    {
+        return "Kicks the football";
+    }
+
+};
+
+class H : public Player
+{
+    public: 
+H(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Holder Name: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Holder";
+    }
+
+    string play() override
+    {
+        return "Holds the football steady for the kicker";
+    }
+
+};
+
+
+class P : public Player
+{
+    public: 
+P(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Punter Name: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Punter";
+    }
+
+    string play() override
+    {
+        return "Punts the football";
+    }
+
+};
+
+class R : public Player
+{
+    public: 
+R(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Returner Name: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Returner";
+    }
+
+    string play() override
+    {
+        return "Tries to return the football after a punt or kick";
+    }
+
+};
+
+
+
+
+
 int main()
 {
     //Vector to hold created players
@@ -130,9 +399,8 @@ int main()
         Players.push_back(qb);
 
         //WR
-        cout << "Enter QB details:\n\n";
-        string name;
-        int number;
+        cout << "Enter WR details:\n\n";
+        
 
         cout << "Player Name (): " << endl;
         getline(cin, name);
@@ -143,20 +411,101 @@ int main()
         Player* wr = new WR(name, number);
         Players.push_back(wr);
 
+        //TE
+        cout << "Enter TE details:\n\n";
+        
 
+        cout << "Player Name (): " << endl;
+        getline(cin, name);
+        cout << "Player Number (): " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* te = new WR(name, number);
+        Players.push_back(te);
+
+
+        //RB
+
+        cout << "Enter RB details:\n\n";
+        cout << "Player Name: " << endl;
+        getline(cin, name);
+        cout << "Player Number: " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* rb = new RB(name, number);
+        Players.push_back(rb);
+
+        //OL
+        while(true)
+        {
+            cout << "Enter OL details:\n\n";
+            
+
+            cout << "Player Name (): " << endl;
+            getline(cin, name);
+            cout << "Player Number (): " << endl;
+            cin >> number;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            //Create player object for each corresponding player
+            Player* ol = new OL(name, number);
+            Players.push_back(ol);
+
+            int choice;
+            cout << "Add another offensive lineman? (1 for no, 2 for yes):" << endl;
+            if (!cin || choice < 1 || choice > 2)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Error. Please enter 1 or 2: ";
+
+            }
+            else if(choice == 1)
+            {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            }
+            //continues if they want to add another
+            else if(choice == 2)
+            {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            }
+        }
+        //Offense display
+        cout << "\nOffensive Team Roster:\n";
         for (Player* player : Players)
         {
-            player -> toString();
-        }
+            string position = player->getPlayerPosition();
+            int number = player->getNumber();
+            name = player->getName();
+
+            cout <<position << "\n---------------------\n" << "Name: " << name << "\nNumber: " << number << "\nPurpose: " << player->play() << "\n\n";
 
 
 
         
 
-       
+        
 
 
-    }
+        }
+
+        //choice to continue
+        int continueChoice;
+        cout << "Would you like to add another set of players? (1 for no, 2 for yes):" << endl;
+        cin >> continueChoice;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (continueChoice == 1)
+        {
+            break;
+        }
+        else if (continueChoice == 2)
+        {
+            continue;
+        }
+
 
 
 
