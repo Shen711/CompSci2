@@ -375,7 +375,7 @@ int main()
 {
     //Vector to hold created players
     vector<Player*> Players;
-
+    int playerCount = 0;
     //choice variable
 
     cout << "Football Team Roster Creator" << endl;
@@ -389,9 +389,9 @@ int main()
         string name;
         int number;
 
-        cout << "Player Name (): " << endl;
+        cout << "Player Name: " << endl;
         getline(cin, name);
-        cout << "Player Number (): " << endl;
+        cout << "Player Number: " << endl;
         cin >> number;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         //Create player object for each corresponding player
@@ -402,9 +402,9 @@ int main()
         cout << "Enter WR details:\n\n";
         
 
-        cout << "Player Name (): " << endl;
+        cout << "Player Name: " << endl;
         getline(cin, name);
-        cout << "Player Number (): " << endl;
+        cout << "Player Number: " << endl;
         cin >> number;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         //Create player object for each corresponding player
@@ -415,9 +415,9 @@ int main()
         cout << "Enter TE details:\n\n";
         
 
-        cout << "Player Name (): " << endl;
+        cout << "Player Name: " << endl;
         getline(cin, name);
-        cout << "Player Number (): " << endl;
+        cout << "Player Number: " << endl;
         cin >> number;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         //Create player object for each corresponding player
@@ -443,9 +443,9 @@ int main()
             cout << "Enter OL details:\n\n";
             
 
-            cout << "Player Name (): " << endl;
+            cout << "Player Name: " << endl;
             getline(cin, name);
-            cout << "Player Number (): " << endl;
+            cout << "Player Number: " << endl;
             cin >> number;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             //Create player object for each corresponding player
@@ -454,6 +454,9 @@ int main()
 
             int choice;
             cout << "Add another offensive lineman? (1 for no, 2 for yes):" << endl;
+            cin >> choice;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             if (!cin || choice < 1 || choice > 2)
             {
                 cin.clear();
@@ -474,6 +477,8 @@ int main()
             }
         }
         //Offense display
+        //Index for tracking how many offense players
+        int offenseCount = 0;
         cout << "\nOffensive Team Roster:\n";
         for (Player* player : Players)
         {
@@ -482,7 +487,7 @@ int main()
             name = player->getName();
 
             cout <<position << "\n---------------------\n" << "Name: " << name << "\nNumber: " << number << "\nPurpose: " << player->play() << "\n\n";
-
+            offenseCount++;
 
 
         
@@ -491,6 +496,8 @@ int main()
 
 
         }
+
+
 
         //choice to continue
         int continueChoice;
@@ -506,8 +513,146 @@ int main()
             continue;
         }
 
+    }
 
+    int offenseCount = size(Players);
 
+    while(true)
+    {
+        //Defensive Team
+        cout << "Enter DL details:\n\n";
+        string name;
+        int number;
 
+        cout << "Player Name: " << endl;
+        getline(cin, name);
+        cout << "Player Number: " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* dl = new DL(name, number);
+        Players.push_back(dl);
 
+        //LB
+        cout << "Enter LB details:\n\n";
+        
+
+        cout << "Player Name: " << endl;
+        getline(cin, name);
+        cout << "Player Number: " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* lb = new LB(name, number);
+        Players.push_back(lb);
+
+        //DB
+        cout << "Enter DB details:\n\n";
+        
+
+        cout << "Player Name: " << endl;
+        getline(cin, name);
+        cout << "Player Number: " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* db = new DB(name, number);
+        Players.push_back(db);
+
+        //Defense display
+        //Takes the offernse count to know what players to not display
+        cout << "\nDefensive Team Roster:\n";
+        for (int i = offenseCount; i < size(Players); i++)
+        {
+            Player* player = Players[i];
+            {
+            string position = player->getPlayerPosition();
+            int number = player->getNumber();
+            name = player->getName();
+
+            cout <<position << "\n---------------------\n" << "Name: " << name << "\nNumber: " << number << "\nPurpose: " << player->play() << "\n\n";
+            }
+        }
+    
+    
+
+    }
+
+    //Defense count to know how many players on defense
+    int defenseCount = size(Players) - offenseCount;
+
+    while(true)
+    {
+        //Special Teams
+        cout << "Enter Kicker details:\n\n";
+        string name;
+        int number;
+
+        cout << "Player Name: " << endl;
+        getline(cin, name);
+        cout << "Player Number: " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* k = new K(name, number);
+        Players.push_back(k);
+
+        //Punter
+        cout << "Enter Punter details:\n\n";
+        
+
+        cout << "Player Name: " << endl;
+        getline(cin, name);
+        cout << "Player Number: " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* p = new P(name, number);
+        Players.push_back(p);
+
+        cout << "Enter Holder details:\n\n";
+        cout << "Player Name: " << endl;
+        getline(cin, name);
+        cout << "Player Number: " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* h = new H(name, number);;
+        Players.push_back(h);
+
+        cout << "Enter Returner details:\n\n";
+        cout << "Player Name: " << endl;
+        getline(cin, name);
+        cout << "Player Number: " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* r = new R(name, number);
+        Players.push_back(r);
+
+        //Special Teams display
+        //Takes the offense and defense count to know what players to not display
+        cout << "\nSpecial Teams Roster:\n";
+        for (int i = offenseCount + defenseCount; i < size(Players); i++)
+        {
+            Player* player = Players[i];
+            {
+            string position = player->getPlayerPosition();
+            int number = player->getNumber();
+            name = player->getName();
+
+            cout <<position << "\n---------------------\n" << "Name: " << name << "\nNumber: " << number << "\nPurpose: " << player->play() << "\n\n";
+            }
+        }
+    
+    
+
+    }
+
+    cout <<"Number of Players on team: " << size(Players) << endl;
+    cout << "Offense Players: " << offenseCount << endl;
+    cout << "Defense Players: " << defenseCount << endl;
+    cout << "Special Teams Players: " << size(Players) - (offenseCount + defenseCount) << endl;
+    
+    return 0;
 }
