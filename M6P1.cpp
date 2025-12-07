@@ -35,7 +35,7 @@ class Player
 
     virtual void toString() = 0; //pure virtual function
     virtual string getPlayerPosition() = 0;
-    virtual void play() = 0;
+    virtual string play() = 0;
 
     string getName()
     {
@@ -56,6 +56,7 @@ class QB : public Player
     {
         this -> name = name;
         this -> number = number;
+
     }
 
     void toString() override
@@ -68,4 +69,96 @@ class QB : public Player
         return "Quarterback";
     }
 
+    string play() override
+    {
+        return "throws a pass";
+    }
+
 };
+
+class WR : public Player
+{
+    public: 
+    WR(string name, int number) : Player(name, number)
+    {
+        this -> name = name;
+        this -> number = number;
+    }
+
+    void toString() override
+    {
+        cout << "Wide Receiver Name: " << name << ", Number: " << number << endl;
+    }
+
+    string getPlayerPosition() override
+    {
+        return "Wide Receiver";
+    }
+
+    string play() override
+    {
+        return "Catches a pass";
+    }
+
+};
+
+int main()
+{
+    //Vector to hold created players
+    vector<Player*> Players;
+
+    //choice variable
+
+    cout << "Football Team Roster Creator" << endl;
+    cout << "----------------------------" << endl;
+
+    //Loop for creating players
+
+    while(true)
+    {
+        cout << "Enter QB details:\n\n";
+        string name;
+        int number;
+
+        cout << "Player Name (): " << endl;
+        getline(cin, name);
+        cout << "Player Number (): " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* qb = new QB(name, number);
+        Players.push_back(qb);
+
+        //WR
+        cout << "Enter QB details:\n\n";
+        string name;
+        int number;
+
+        cout << "Player Name (): " << endl;
+        getline(cin, name);
+        cout << "Player Number (): " << endl;
+        cin >> number;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //Create player object for each corresponding player
+        Player* wr = new WR(name, number);
+        Players.push_back(wr);
+
+
+        for (Player* player : Players)
+        {
+            player -> toString();
+        }
+
+
+
+        
+
+       
+
+
+    }
+
+
+
+
+}
