@@ -1,10 +1,10 @@
 //Program Name: Abstract Base NFL Player Class
 //Author: Nathan Schoenike
-//Date Last Updated: 12/1/2025
-//Purpose: To have a beverage ordering system using inheritance
+//Date Last Updated: 12/7/2025
+//Purpose: To create players to add to a football team
 #include <iostream>
-#include <fstream> //for file
-#include <vector> //for assignment
+#include <fstream> 
+#include <vector> 
 #include <limits>
 #include <string>
 #include <iostream>
@@ -33,7 +33,7 @@ class Player
         this -> number = number;
     }
 
-    virtual void toString() = 0; //pure virtual function
+    virtual void toString() = 0; //virtual functions
     virtual string getPlayerPosition() = 0;
     virtual string play() = 0;
 
@@ -42,13 +42,14 @@ class Player
         return name;
     }
 
-    int getNumber()
+    int getPlayerID()
     {
         return number;
     }
 };
 
 //Sub classes for offense
+//All of my subclasses I just copy and pasted after gettin the QB finished. All that I had to do was change the names that are returned and the play descriptions for each one
 class QB : public Player
 {
     public: 
@@ -170,7 +171,7 @@ class OL : public Player
 
     string getPlayerPosition() override
     {
-        return "Offensive Linemain";
+        return "Offensive Lineman";
     }
 
     string play() override
@@ -181,7 +182,7 @@ class OL : public Player
 };
 
 //Defensive Teams
-
+//Defensive Line
 class DL : public Player
 {
     public: 
@@ -207,7 +208,7 @@ DL(string name, int number) : Player(name, number)
     }
 
 };
-
+//Linebacker
 class LB : public Player
 {
     public: 
@@ -233,7 +234,7 @@ LB(string name, int number) : Player(name, number)
     }
 
 };
-
+//Defensive Back
 class DB : public Player
 {
     public: 
@@ -438,6 +439,7 @@ int main()
         Players.push_back(rb);
 
         //OL
+        //Loop for creating more than one lineman
         while(true)
         {
             cout << "Enter OL details:\n\n";
@@ -483,7 +485,7 @@ int main()
         for (Player* player : Players)
         {
             string position = player->getPlayerPosition();
-            int number = player->getNumber();
+            int number = player->getPlayerID();
             name = player->getName();
 
             cout <<position << "\n---------------------\n" << "Name: " << name << "\nNumber: " << number << "\nPurpose: " << player->play() << "\n\n";
@@ -567,13 +569,24 @@ int main()
             Player* player = Players[i];
             {
             string position = player->getPlayerPosition();
-            int number = player->getNumber();
+            int number = player->getPlayerID();
             name = player->getName();
 
             cout <<position << "\n---------------------\n" << "Name: " << name << "\nNumber: " << number << "\nPurpose: " << player->play() << "\n\n";
             }
         }
-    
+        int continueChoice;
+        cout << "Would you like to add another set of players? (1 for no, 2 for yes):" << endl;
+        cin >> continueChoice;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (continueChoice == 1)
+        {
+            break;
+        }
+        else if (continueChoice == 2)
+        {
+            continue;
+        }
     
 
     }
@@ -638,11 +651,23 @@ int main()
             Player* player = Players[i];
             {
             string position = player->getPlayerPosition();
-            int number = player->getNumber();
+            int number = player->getPlayerID();
             name = player->getName();
 
             cout <<position << "\n---------------------\n" << "Name: " << name << "\nNumber: " << number << "\nPurpose: " << player->play() << "\n\n";
             }
+        }
+        int continueChoice;
+        cout << "Would you like to add another set of players? (1 for no, 2 for yes):" << endl;
+        cin >> continueChoice;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (continueChoice == 1)
+        {
+            break;
+        }
+        else if (continueChoice == 2)
+        {
+            continue;
         }
     
     
