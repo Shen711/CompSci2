@@ -152,7 +152,11 @@ int main()
             }
             else if (choice == 2)
             {
-                
+                for(Character* character : Characters)
+                {
+                    string charClass = character->getCharacterClass();
+                    name = character->getName();
+                    skills = character->getSkills();
                 
             }
             else if (choice == 1)
