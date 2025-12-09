@@ -39,6 +39,18 @@ class Character
     virtual string getCharacterClass() = 0;
     virtual vector<string> getSkills() = 0;
 
+    //Display
+    void thisClassSkills()
+    {
+        cout << "Skills for " << charClass << ": " << endl;
+        for (const auto& skill : skillArray)
+        {
+            cout << "- " << skill << endl;
+        }
+    }
+
+    
+
     string getName()
     {
         return name;
@@ -117,6 +129,7 @@ int main()
     string name;    
     vector<string> skills;
     
+    Character* characterPtr = nullptr;
     //Menu loop
     while(true)
     {
@@ -148,6 +161,8 @@ int main()
             else if (choice == 3)
             {
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Options menu is currently unavailable. Returning to main menu." << endl;
+                break;
                 
             }
             else if (choice == 2)
@@ -158,6 +173,7 @@ int main()
                     name = character->getName();
                     skills = character->getSkills();
                 
+                }
             }
             else if (choice == 1)
             {
