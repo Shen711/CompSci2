@@ -21,13 +21,14 @@ class Character
     protected: 
     string name;
     string charClass;
+    //every character starts at level 1
     int level = 1;
     vector<string> skillArray;
 
     public: 
 
     //Constructor w default values for no class
-    Character(string name = "Unknown", string charClass = "Stranger", vector<string> skills = {"No skills. (Default)"})
+    Character(string name = "Unknown", string charClass = "Stranger", vector<string> skills = {})
     {
         this -> name = name;
         this -> charClass = charClass;
@@ -133,8 +134,8 @@ int main()
     //Menu loop
     while(true)
     {
-        cout << "         Dark Souls 1\n" << endl;
-        cout << "        ------------------------\n";
+        cout << "      Dark Souls 1\n" << endl;
+        cout << "------------------------\n";
         cout << "1. Start New Save\n"
              << "2. Load Save\n"
              << "3. Options\n"
@@ -175,10 +176,23 @@ int main()
                 
                 }
             }
+            int save_counter = 1;
             else if (choice == 1)
             {
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                break;
+                cout << "\nChoose a saved game:\n";
+                cout << "----------------" << endl;
+                //(fill is w = 40)
+                cout << "________________________________________\n";
+                
+                for (size_t i = 0; i < 3; ++i)
+                {
+                    string charClass = character->getCharacterClass();
+                    name = character->getName();
+                    skills = character->getSkills();
+                    cout << "|1. " << left << setw(36) << this->getName() + to_string(i + 1) << "|\n";
+                }
+                
             }
        
     }
