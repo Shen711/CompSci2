@@ -29,7 +29,7 @@ struct Stats
     int resistance = 0;
     int intelligence = 0;
     int faith = 0;
-    int availablePts = 97;
+    int availablePts = 10;
     //sum
     
     //calculates available points remaining for skill upgrade point capacity
@@ -432,19 +432,89 @@ int main()
                             continue;
 
                         }
+                        else if (input == 9)
+                        {
+                            break;
+                        }
                         cout << "Now enter the value you want that stat to be: " << endl;
                         cin >> inputStat;
                         switch(input)
                         {
                             
                             case 1:
-                                cout << "New vitality: " << endl;
-                                cin >> inputStat;
                                 characterPtr->setVitality(inputStat);
                                 break;
+                            case 2:
+                                characterPtr->setAttunement(inputStat);
+                                break;
+                            case 3:
+                                characterPtr->setIntelligence(inputStat);
+                                break;
+                            case 4:
+                                characterPtr->setFaith(inputStat);
+                                break;
+
                         }
+                        cout << "-----------------------------" << endl;
                         characterPtr->printStats();
                     }
+                    cout << "-------------------\n";
+                    int skillChoice;
+                    const auto& classSkills = characterPtr->getClassSkills();
+                    cout << "Add from the selection of " << characterPtr->getCharacterClass() << " skills (Only 2!): " << endl;
+                    characterPtr->getClassSkills();
+                    
+                    for (int i = 0; i < classSkills.size(); i++)
+                    {
+                        cout << i + 1 << ". " << classSkills[i] << endl;
+
+                    }
+                    //vector for holding skills in this instance for counting
+                    vector<string> mySkills;
+
+                    while(mySkills.size() < 2)
+                    {
+                        cin >> skillChoice;
+                        if (skillChoice > 3 || skillChoice < 1)
+                        {
+                            cout << "Invalid selection. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+                        }
+                        
+                        
+                        string skill = classSkills[skillChoice - 1];
+                        
+
+                        if (find(mySkills.begin(), mySkills.end(), skill) != mySkills.end()) 
+                        {
+                        cout << "You already selected that skill. Pick a different one." << endl;
+                        continue;
+                        }
+                        mySkills.push_back(skill);
+                    }
+
+                    characterPtr->skills = mySkills;
+                    const auto& playerSkills = characterPtr->skills;
+
+                    cout << "------------------------------------------\n";
+                    characterPtr->toString();
+                    cout << "Skills: " ;
+                    for (int i = 0; i < characterPtr->skills.size(); i++)
+                    {
+                        cout << characterPtr->skills[i] << ", ";
+                    }
+                    cout << "\n-----------------------------\n";
+                    
+                    
+
+                    characterPtr->printStats();
+
+                    cout << "\n---------------------------------\n";
+
+                    break;
+
                     
                     
                 }
