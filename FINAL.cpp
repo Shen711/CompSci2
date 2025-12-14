@@ -505,7 +505,9 @@ int main()
                     {
                         cout << characterPtr->skills[i] << ", ";
                     }
-                    cout << "\n-----------------------------\n";
+                    cout << "\n-----------------------------------\n";
+                    cout << "Character Successfully Created..." << endl;
+                    cout << "Exiting to main menu....." << endl;
                     
                     
 
