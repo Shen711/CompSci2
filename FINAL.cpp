@@ -30,6 +30,7 @@ struct Stats
     int intelligence = 0;
     int faith = 0;
     int availablePts = 10;
+
     //sum
     
     //calculates available points remaining for skill upgrade point capacity
@@ -148,7 +149,15 @@ class Character
         return classSkills;
     }
     
+    int getVitality()
+    {
+        return stats.vitality;
+    }
 
+    int getAvailablePts()
+    {
+        return stats.availablePts;
+    }
     
 
     string getName()
@@ -190,14 +199,43 @@ class Pyromancer : public Character
 
     void setVitality(int v) override
     {
-        if (v > 15 || v < 0)
+        //This will be my format for all subclass setters for Stat attributes. placer is for the current value, pointChanhe is the
+        //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
+        //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
+        //All in a while loop for validation
+        int placer = getVitality();
+        int points = getAvailablePts();
+        cout << "Current:" << placer<<endl;
+        int pointChange;
+        while(true)
         {
-            cout << "Too high, try again. Class max strength: 15" << endl;
-        }
-        else
-        {
-            stats.vitality = v;
-        }
+            if (v > 15 || v < 0)
+            {
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats)
+            else if (v < placer)
+            {
+                pointChange = placer - v;
+                stats.availablePts -= pointChange; 
+                stats.vitality = v;
+                break;
+            }
+            else if (v > placer)
+            {
+                pointChange = v - placer;
+                stats.availablePts -= pointChange;
+                stats.vitality = v;
+                break;
+            }
+            
+    }
+        
+
+        
     }
     //Originally was going to use this for getting class skills but decided to just make them hardcoded in constructor body subclass
     // vector<string> getClassSkills() override
