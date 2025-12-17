@@ -31,7 +31,7 @@ struct Stats
     int faith = 0;
     int availablePts = 10;
 
-    //sum
+    //v,a,e,s,d,r,i,f
     
     //calculates available points remaining for skill upgrade point capacity
     int getSum()
@@ -59,14 +59,7 @@ struct Stats
     }
 };
 
-enum class CharacterClass
-{
-    Pyromancer = 1,
-    Priest = 2,
-    Thief = 3,
-    Knight = 4,
-    Barbarian = 5
-};
+
 
 class Character
 {
@@ -86,7 +79,7 @@ class Character
     }
     
 
-    //Constructor w default values for no class
+    //Constructor w default values for no class, although you have to have a subclass object. No base player allowed
     Character(string name = "Unknown Name", string charClass = "Stranger", vector<string> skills = {"No skills"})
     {
         this -> name = name;
@@ -103,7 +96,7 @@ class Character
     vector<string> classSkills;
 
     //setters
-    virtual void setVitality(int v) = 0;
+    virtual void setVitality() = 0;
     // void setVitality(int v)
     // {
         
@@ -197,30 +190,37 @@ class Pyromancer : public Character
         return "Pyromancer";
     }
 
-    void setVitality(int v) override
+    void setVitality() override
     {
         //This will be my format for all subclass setters for Stat attributes. placer is for the current value, pointChanhe is the
         //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
         //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
         //All in a while loop for validation
+        int v;
         int placer = getVitality();
         int points = getAvailablePts();
         cout << "Current:" << placer<<endl;
         int pointChange;
         while(true)
         {
-            if (v > 15 || v < 0)
+            cin >> v;
+            if (!cin || v > 15 || v < 0)
             {
+                cout << "Max(15)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats)
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
             else if (v < placer)
             {
                 pointChange = placer - v;
-                stats.availablePts -= pointChange; 
+                stats.availablePts += pointChange; 
                 stats.vitality = v;
                 break;
             }
@@ -269,22 +269,51 @@ class Priest : public Character
         return "Priest";
     }
 
-    void setVitality(int v) override
+
+    void setVitality() override
     {
-        if (v > 15 || v < 0)
+        int v;
+        int placer = getVitality();
+        int points = getAvailablePts();
+        cout << "Current:" << placer<<endl;
+        int pointChange;
+        while(true)
         {
-            cout << "Pyromancer max strength: 15" << endl;
-        }
-        else
-        {
-            stats.vitality = v;
+            if (v > 25 || v < 0)
+            {
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (v < placer)
+            {
+                pointChange = placer - v;
+                stats.availablePts += pointChange; 
+                stats.vitality = v;
+                break;
+            }
+            else if (v > placer)
+            {
+                pointChange = v - placer;
+                stats.availablePts -= pointChange;
+                stats.vitality = v;
+                break;
+            }
+            
         }
     }
-    
-
-    
-
 };
+    
+
+    
+
+
 class Thief : public Character
 {
     public: 
@@ -293,6 +322,7 @@ class Thief : public Character
         this -> name = name;
         this -> charClass = "Thief";
         classSkills = {"Coin Crash", "Deceivery", "Trickster's Pull"};
+        stats = {13, 10, 10, 9, 8, 7,10,11};
     }
 
     void toString() override
@@ -305,21 +335,182 @@ class Thief : public Character
         return "Thief";
     }
 
-    void setVitality(int v) override
+        void setVitality() override
     {
-        if (v > 15 || v < 0)
+        int v;
+        int placer = getVitality();
+        int points = getAvailablePts();
+        cout << "Current:" << placer<<endl;
+        int pointChange;
+        while(true)
         {
-            cout << "Pyromancer max strength: 15" << endl;
+            cin >> v;
+            if (!cin || v > 15 || v < 0)
+            {
+                cout << "Max(15)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (v < placer)
+            {
+                pointChange = placer - v;
+                stats.availablePts += pointChange; 
+                stats.vitality = v;
+                break;
+            }
+            else if (v > placer)
+            {
+                pointChange = v - placer;
+                stats.availablePts -= pointChange;
+                stats.vitality = v;
+                break;
+            }
+            
         }
-        else
+        
+    }
+
+};
+
+class Fighter : public Character
+{
+    public: 
+    Fighter(string name, vector<string> skills) : Character(name, "Fighter", skills)
+    {
+        this -> name = name;
+        this -> charClass = "Thief";
+        classSkills = {"Fell Sweep", "Anggry Charge", "Sword Slam"};
+        stats = {27, 10, 15, 23, 18, 9, 7};
+        //v,a,e,s,d,r,i,f
+    }
+
+    void toString() override
+    {
+        cout << "Name: " << name << ", Level: " << level << endl;
+    }
+
+    string getCharacterClass() override
+    {
+        return "Fighter";
+    }
+
+        void setVitality() override
+    {
+        int v;
+
+        int placer = getVitality();
+        int points = getAvailablePts();
+        cout << "Current:" << placer<<endl;
+        int pointChange;
+        while(true)
         {
-            stats.vitality = v;
+            cin >> v;
+            if (!cin || v > 30 || v < 0)
+            {
+                cout << "Max(30)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (v < placer)
+            {
+                pointChange = placer - v;
+                stats.availablePts += pointChange; 
+                stats.vitality = v;
+                break;
+            }
+            else if (v > placer)
+            {
+                pointChange = v - placer;
+                stats.availablePts -= pointChange;
+                stats.vitality = v;
+                break;
+            }
+            
         }
+        
+        
     }
     
+};
+//v,a,e,s,d,r,i,f
+class Barbarian : public Character
+{
+    public: 
+    Barbarian(string name, vector<string> skills) : Character(name, "Barbarian", skills)
+    {
+        this -> name = name;
+        this -> charClass = "Barbarian";
+        classSkills = {"Brolic Blast", "MeatHead Swing", "Hunky Hateness"};
+        stats = {30, 3, 13, 26, 8, 12, 2, 1};
+    }
 
+    void toString() override
+    {
+        cout << "Name: " << name << ", Level: " << level << endl;
+    }
+
+    string getCharacterClass() override
+    {
+        return "Barbarian";
+    }
+
+        void setVitality() override
+    {
+        int v;
+        int placer = getVitality();
+        int points = getAvailablePts();
+        cout << "Current:" << placer<<endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> v;
+            if (v > 35 || v < 0)
+            {
+                cout << "Max(35)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (v < placer)
+            {
+                pointChange = placer - v;
+                stats.availablePts += pointChange; 
+                stats.vitality = v;
+                break;
+            }
+            else if (v > placer)
+            {
+                pointChange = v - placer;
+                stats.availablePts -= pointChange;
+                stats.vitality = v;
+                break;
+            }
+            
+        }
+        
+        
+    }
     
-
 };
 
 
@@ -442,12 +633,12 @@ int main()
                         case 3:
                             characterPtr = new Thief(name, skills);
                             break;
-                        // case 4:
-                        //     characterPtr = new Knight(name, skills);
-                        //     break;
-                        // case 5:
-                        //     characterPtr = new Barbarian(name, skills);
-                        //     break;
+                        case 4:
+                            characterPtr = new Fighter(name, skills);
+                            break;
+                        case 5:
+                            characterPtr = new Barbarian(name, skills);
+                            break;
                     }
                     Characters.push_back(characterPtr);
                     characterPtr->toString();
@@ -474,13 +665,13 @@ int main()
                         {
                             break;
                         }
-                        cout << "Now enter the value you want that stat to be: " << endl;
-                        cin >> inputStat;
+                        
                         switch(input)
                         {
-                            
+                            cout << "Desired stat #: " << endl;
                             case 1:
-                                characterPtr->setVitality(inputStat);
+                            
+                                characterPtr->setVitality();
                                 break;
                             case 2:
                                 characterPtr->setAttunement(inputStat);
