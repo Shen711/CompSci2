@@ -88,7 +88,21 @@ class Character
         
     }
 
-    virtual void toString() = 0; //virtual functions
+    //virtual function but not an override
+    virtual void toString() const
+    {
+        cout << "-----------------------------------------------------" << endl;
+        cout << "|" << fixed << left << setw(19) << setfill(' ') << name << "Class: "  << fixed << left << setw(25) << setfill(' ') << charClass << "|" << endl;
+        cout << "|Level " << left << fixed << setfill(' ') << setw(45) << level << "|" << endl;
+        cout << "|Skills: ";
+        for (const string& skill : skills)
+        {
+            
+            cout << "." << skill << " ";
+            
+        }
+        cout << "\n";
+    }
     virtual string getCharacterClass() = 0;
     
     //vectors to hold selected player skills, and class skills that pertain to their specific class
@@ -97,11 +111,7 @@ class Character
 
     //setters
     virtual void setVitality() = 0;
-    // void setVitality(int v)
-    // {
-        
-    //     stats.vitality = v;
-    // }
+    
     void setStrength(int s)
     {
         stats.strength = s;
@@ -180,10 +190,6 @@ class Pyromancer : public Character
 
     }
 
-    void toString() override
-    {
-        cout << "Pyromancer Name: " << name << ", Level: " << level << endl;
-    }
 
     string getCharacterClass() override
     {
@@ -191,6 +197,50 @@ class Pyromancer : public Character
     }
 
     void setVitality() override
+    {
+        //This will be my format for all subclass setters for Stat attributes. placer is for the current value, pointChanhe is the
+        //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
+        //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
+        //All in a while loop for validation
+        int v;
+        int placer = getVitality();
+        int points = getAvailablePts();
+        cout << "Current:" << placer<<endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> v;
+            if (!cin || v > 15 || v < 0)
+            {
+                cout << "Max(15)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (v < placer)
+            {
+                pointChange = placer - v;
+                stats.availablePts += pointChange; 
+                stats.vitality = v;
+                break;
+            }
+            else if (v > placer)
+            {
+                pointChange = v - placer;
+                stats.availablePts -= pointChange;
+                stats.vitality = v;
+                break;
+            }
+            
+    }
+
+    void setAttunement() override
     {
         //This will be my format for all subclass setters for Stat attributes. placer is for the current value, pointChanhe is the
         //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
@@ -259,10 +309,7 @@ class Priest : public Character
         stats = {22, 15, 10, 9, 8, 7,10,11};
     }
 
-    void toString() override
-    {
-        cout << "Name: " << name << ", Level: " << level << endl;
-    }
+    
 
     string getCharacterClass() override
     {
@@ -325,10 +372,10 @@ class Thief : public Character
         stats = {13, 10, 10, 9, 8, 7,10,11};
     }
 
-    void toString() override
-    {
-        cout << "Name: " << name << ", Level: " << level << endl;
-    }
+    // void toString() override
+    // {
+    //     cout << "Name: " << name << ", Level: " << level << endl;
+    // }
 
     string getCharacterClass() override
     {
@@ -385,16 +432,16 @@ class Fighter : public Character
     Fighter(string name, vector<string> skills) : Character(name, "Fighter", skills)
     {
         this -> name = name;
-        this -> charClass = "Thief";
+        this -> charClass = "Fighter";
         classSkills = {"Fell Sweep", "Anggry Charge", "Sword Slam"};
         stats = {27, 10, 15, 23, 18, 9, 7};
         //v,a,e,s,d,r,i,f
     }
 
-    void toString() override
-    {
-        cout << "Name: " << name << ", Level: " << level << endl;
-    }
+    // void toString() override
+    // {
+    //     cout << "Name: " << name << ", Level: " << level << endl;
+    // }
 
     string getCharacterClass() override
     {
@@ -458,10 +505,10 @@ class Barbarian : public Character
         stats = {30, 3, 13, 26, 8, 12, 2, 1};
     }
 
-    void toString() override
-    {
-        cout << "Name: " << name << ", Level: " << level << endl;
-    }
+    // void toString() override
+    // {
+    //     cout << "Name: " << name << ", Level: " << level << endl;
+    // }
 
     string getCharacterClass() override
     {
@@ -545,11 +592,13 @@ int main()
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
+            //exit game
             else if (choice == 4)
             {
             cout << "Exiting to desktop..." << endl;
             return 0;
             }
+            //options menu, wont incorporate
             else if (choice == 3)
             {
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -557,17 +606,70 @@ int main()
                 break;
                 
             }
+            //load save
             else if (choice == 2)
             {
+                int menu2Choice;
+                int openSaves = 3 - Characters.size();
+                int savedGames = Characters.size();
+
+                cout << "----------Saved Characters---------" << endl;
                 for(Character* character : Characters)
                 {
-                    string charClass = character->getCharacterClass();
-                    name = character->getName();
-                    skills = character->getSkills();
-                
+
+                    character->toString();
+   
                 }
+                //display to show availble save slots
+                for (int i = 0; i < openSaves; i++)
+                {
+                    cout << "-----------------------------------------------------" << endl;
+                    cout << fixed << left << setw(52) << setfill(' ') << "|No Save Found"  << "|" << endl;
+                    cout << "-----------------------------------------------------" << endl;
+                }   
+                cout << "Select which save to load in(9 to exit): " << endl;
+                while(true)
+                {
+                    
+                    cin >> menu2Choice;
+
+                    if (!cin || menu2Choice < 0 || menu2Choice > 3 && menu2Choice != 9)
+                    {
+                        cout <<"Invalid option. Try again(1-3): " << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        continue;
+
+                    }
+                    else if (menu2Choice == 9)
+                    {
+                        cout << "Exiting to main menu...." << endl;
+                        break;
+                    }
+                    else if (menu2Choice > savedGames && menu2Choice < 4)
+                    {
+                        cout << "You have an open save slot " << menu2Choice << endl;
+                        cout << "Create one using the main menu!" << endl;
+                        //then directs to main menu
+                        break;
+                    }
+                    else
+                    {
+                        Character* chosenC = Characters[menu2Choice - 1];
+                        string n = chosenC->getName();
+                        string c = chosenC->getCharacterClass();
+                        cout << "Loading in to game as: " << n << " the " << c << endl;
+                        cout << "Have a grand time!" << endl;
+                        return 0;
+                    }
+
+
+                }
+                //goes back to main menu
+                break;
             }
             
+            //actual player creation
             else if (choice == 1)
             {
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -641,10 +743,12 @@ int main()
                             break;
                     }
                     Characters.push_back(characterPtr);
-                    characterPtr->toString();
+                    cout << "--------------------------------\n";
+                    cout << "Name: " << characterPtr->getName() << endl;
+                    cout << "Class: " << characterPtr->getCharacterClass() << endl;
                     characterPtr->printStats();
                     //initial object character creation finished, then stats
-                    cout << "-------------------\n";
+                    cout << "--------------------------------\n";
                     
                     while(true)
                     {
@@ -668,7 +772,7 @@ int main()
                         
                         switch(input)
                         {
-                            cout << "Desired stat #: " << endl;
+                           
                             case 1:
                             
                                 characterPtr->setVitality();
@@ -684,10 +788,10 @@ int main()
                                 break;
 
                         }
-                        cout << "-----------------------------" << endl;
+                        cout << "-------------------------------" << endl;
                         characterPtr->printStats();
                     }
-                    cout << "-------------------\n";
+                    cout << "--------------------------------\n";
                     int skillChoice;
                     const auto& classSkills = characterPtr->getClassSkills();
                     cout << "Add from the selection of " << characterPtr->getCharacterClass() << " skills (Only 2!): " << endl;
@@ -728,19 +832,23 @@ int main()
                     const auto& playerSkills = characterPtr->skills;
 
                     cout << "------------------------------------------\n";
-                    characterPtr->toString();
+                    cout << characterPtr->getName() << " the " << characterPtr->getCharacterClass() << endl;
+                    //All starting characters are level 1
+                    cout << "Level 1" << endl;
                     cout << "Skills: " ;
                     for (int i = 0; i < characterPtr->skills.size(); i++)
                     {
                         cout << characterPtr->skills[i] << ", ";
                     }
+                    cout << "Stats: " << endl;
+                    characterPtr->printStats();
                     cout << "\n-----------------------------------\n";
                     cout << "Character Successfully Created..." << endl;
                     cout << "Exiting to main menu....." << endl;
                     
                     
 
-                    characterPtr->printStats();
+                    
 
                     cout << "\n---------------------------------\n";
 
