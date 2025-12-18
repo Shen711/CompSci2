@@ -1,17 +1,14 @@
 //Program Name: Dark Souls Character creator
 //Author: Nathan Schoenike
-//Date Last Updated: 12/7/2025
-//Purpose: To create players to add to a football team
+//Date Last Updated: 12/18/2025
+//Purpose: To model the dark souls 1 display menu, and character creation
 #include <iostream>
-#include <fstream> 
 #include <vector> 
 #include <limits>
 #include <string>
-#include <iostream>
 #include <cctype>
 #include <algorithm>
 #include <iomanip>
-#include <ctime>
 #include <stdexcept>
 
 using namespace std;
@@ -34,6 +31,8 @@ struct Stats
     //v,a,e,s,d,r,i,f
     
     //calculates available points remaining for skill upgrade point capacity
+    //Unused but decided to keep it in to kind of show you my though process when 
+    //starting the project
     int getSum()
     {
         
@@ -60,7 +59,8 @@ struct Stats
 };
 
 
-
+//Base class, just holds name and class name, level is always set to 1 since this
+//program only allows for creation and not actual playing(sadly)
 class Character
 {
     protected: 
@@ -73,6 +73,7 @@ class Character
 
     public: 
     
+    //the stats method is called in here so all subclasses have access to the stats, not overriden
     void printStats() const
     {
         stats.printStats();
@@ -103,7 +104,7 @@ class Character
         }
         cout << "\n";
     }
-    virtual string getCharacterClass() = 0;
+    
     
     //vectors to hold selected player skills, and class skills that pertain to their specific class
     vector<string> skills;
@@ -118,15 +119,33 @@ class Character
     virtual void setResistance() = 0;
     virtual void setIntelligence() = 0;
     virtual void setFaith() = 0;
+
+    //getters
+    virtual string getCharacterClass() = 0;
     
+    int getAvailablePts()
+    {
+        return stats.availablePts;
+    }
     
 
+    string getName()
+    {
+        return name;
+    }
 
-    //Display
+    int getLevel()
+    {
+        return level;
+    }
+
+
+    //This is skills chosen in relation to created player
     const vector<string>& getSkills() const
     {
         return skills;
     }
+    //This is availble skills to choose from per class(3)
     const vector<string>& getClassSkills() const
     {
         return classSkills;
@@ -167,26 +186,13 @@ class Character
 
 
 
-    int getAvailablePts()
-    {
-        return stats.availablePts;
-    }
     
-
-    string getName()
-    {
-        return name;
-    }
-
-    int getLevel()
-    {
-        return level;
-    }
 };
 
 //Pyromancer subclass
 class Pyromancer : public Character
 {
+    //Pyro Max Stats: v15, a40, s12, d26, r40, e25, i30, f50
     public: 
     Pyromancer(string name, vector<string> skills) : Character(name, "Pyromancer")
     {
@@ -194,6 +200,7 @@ class Pyromancer : public Character
         this -> charClass = "Pyromancer";
         classSkills = {"Holy Blast", "Flame Whip", "Melting Motion"};
         stats = {10, 18, 8, 5, 10, 14, 17, 15};
+        //Opted for this method^ as opposed to the one below so there are no unexpected errors
         // setVitality(10);
         // setStrength(8);
         // setAttunement(18);
@@ -212,6 +219,8 @@ class Pyromancer : public Character
         //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
         //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
         //All in a while loop for validation
+
+        
         int v;
         int placer = getVitality();
         int points = getAvailablePts();
@@ -560,6 +569,7 @@ class Pyromancer : public Character
 
 class Priest : public Character
 {
+    //Priest max stats: v30, a45, e19, d26, s12, i30, f50, r27
     public: 
     Priest(string name, vector<string> skills) : Character(name, "Priest", skills)
     {
@@ -593,9 +603,9 @@ class Priest : public Character
         while(true)
         {
             cin >> v;
-            if (!cin || v > 25 || v < 0)
+            if (!cin || v > 30 || v < 0)
             {
-                cout << "Max(25)" << endl;
+                cout << "Max(30)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -635,9 +645,9 @@ class Priest : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 40 || a < 0)
+            if (!cin || a > 45 || a < 0)
             {
-                cout << "Max(40)" << endl;
+                cout << "Max(45)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -718,9 +728,9 @@ class Priest : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 25 || a < 0)
+            if (!cin || a > 19 || a < 0)
             {
-                cout << "Max(25)" << endl;
+                cout << "Max(19)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -802,9 +812,9 @@ class Priest : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 40 || a < 0)
+            if (!cin || a > 27 || a < 0)
             {
-                cout << "Max(40)" << endl;
+                cout << "Max(27)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -839,7 +849,7 @@ class Priest : public Character
         int a;
         int placer = getIntelligence();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change the stat to?" << endl;
         int pointChange;
         while(true)
         {
@@ -925,13 +935,14 @@ class Priest : public Character
 
 class Thief : public Character
 {
+    //Thief max stats: v17, a15, e32, d45, s18, f11, r12, i10 
     public: 
     Thief(string name, vector<string> skills) : Character(name, "Thief", skills)
     {
         this -> name = name;
         this -> charClass = "Thief";
         classSkills = {"Coin Crash", "Deceivery", "Trickster's Pull"};
-        stats = {13, 10, 10, 9, 8, 7,10,11};
+        stats = {13, 10, 10, 20, 8, 7,10,11};
     }
 
 
@@ -943,10 +954,7 @@ class Thief : public Character
 
     void setVitality() override
     {
-        //This will be my format for all subclass setters for Stat attributes. placer is for the current value, pointChanhe is the
-        //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
-        //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
-        //All in a while loop for validation
+        
         int v;
         int placer = getVitality();
         int points = getAvailablePts();
@@ -955,373 +963,9 @@ class Thief : public Character
         while(true)
         {
             cin >> v;
-            if (!cin || v > 15 || v < 0)
+            if (!cin || v > 17 || v < 0)
             {
-                cout << "Max(15)" << endl;
-                cout <<"Invalid input. Try again." << endl;
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                            continue;
-            }
-            else if(stats.availablePts <= 0)
-            {
-                cout << "No available attribute points to distibrute." << endl;
-                cout <<  "Finish creating or lower some attribute points..." << endl;
-            }
-            else if (v < placer)
-            {
-                pointChange = placer - v;
-                stats.availablePts += pointChange; 
-                stats.vitality = v;
-                break;
-            }
-            else if (v > placer)
-            {
-                pointChange = v - placer;
-                stats.availablePts -= pointChange;
-                stats.vitality = v;
-                break;
-            }
-            
-        }
-    }
-
-    void setAttunement() override
-    {
-        
-        int a;
-        int placer = getAttunement();
-        int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
-        int pointChange;
-        while(true)
-        {
-            cin >> a;
-            if (!cin || a > 40 || a < 0)
-            {
-                cout << "Max(40)" << endl;
-                cout <<"Invalid input. Try again." << endl;
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                            continue;
-            }
-            else if(stats.availablePts <= 0)
-            {
-                cout << "No available attribute points to distibrute." << endl;
-                cout <<  "Finish creating or lower some attribute points..." << endl;
-            }
-            else if (a < placer)
-            {
-                pointChange = placer - a;
-                stats.availablePts += pointChange; 
-                stats.attunement = a;
-                break;
-            }
-            else if (a > placer)
-            {
-                pointChange = a - placer;
-                stats.availablePts -= pointChange;
-                stats.attunement = a;
-                break;
-            }
-        }
-            
-    }
-        void setStrength() override
-    {
-
-        int a;
-        int placer = getStrength();
-        int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
-        int pointChange;
-        while(true)
-        {
-            cin >> a;
-            if (!cin || a > 12 || a < 0)
-            {
-                cout << "Max(12)" << endl;
-                cout <<"Invalid input. Try again." << endl;
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                            continue;
-            }
-            else if(stats.availablePts <= 0)
-            {
-                cout << "No available attribute points to distibrute." << endl;
-                cout <<  "Finish creating or lower some attribute points..." << endl;
-            }
-            else if (a < placer)
-            {
-                pointChange = placer - a;
-                stats.availablePts += pointChange; 
-                stats.strength = a;
-                break;
-            }
-            else if (a > placer)
-            {
-                pointChange = a - placer;
-                stats.availablePts -= pointChange;
-                stats.strength = a;
-                break;
-            }
-        }
-            
-    } 
-
-            void setEndurance() override
-    {
-        
-        int a;
-        int placer = getEndurance();
-        int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
-        int pointChange;
-        while(true)
-        {
-            cin >> a;
-            if (!cin || a > 25 || a < 0)
-            {
-                cout << "Max(25)" << endl;
-                cout <<"Invalid input. Try again." << endl;
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                            continue;
-            }
-            else if(stats.availablePts <= 0)
-            {
-                cout << "No available attribute points to distibrute." << endl;
-                cout <<  "Finish creating or lower some attribute points..." << endl;
-            }
-            else if (a < placer)
-            {
-                pointChange = placer - a;
-                stats.availablePts += pointChange; 
-                stats.endurance = a;
-                break;
-            }
-            else if (a > placer)
-            {
-                pointChange = a - placer;
-                stats.availablePts -= pointChange;
-                stats.endurance = a;
-                break;
-            }
-        }
-            
-    }
-
-    void setDexterity() override
-    {
-        
-        int a;
-        int placer = getDexterity();
-        int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
-        int pointChange;
-        while(true)
-        {
-            cin >> a;
-            if (!cin || a > 26 || a < 0)
-            {
-                cout << "Max(26)" << endl;
-                cout <<"Invalid input. Try again." << endl;
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                            continue;
-            }
-            else if(stats.availablePts <= 0)
-            {
-                cout << "No available attribute points to distibrute." << endl;
-                cout <<  "Finish creating or lower some attribute points..." << endl;
-            }
-            else if (a < placer)
-            {
-                pointChange = placer - a;
-                stats.availablePts += pointChange; 
-                stats.dexterity = a;
-                break;
-            }
-            else if (a > placer)
-            {
-                pointChange = a - placer;
-                stats.availablePts -= pointChange;
-                stats.dexterity = a;
-                break;
-            }
-        }
-            
-    }
-
-    void setResistance() override
-    {
-        
-        int a;
-        int placer = getResistance();
-        int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
-        int pointChange;
-        while(true)
-        {
-            cin >> a;
-            if (!cin || a > 40 || a < 0)
-            {
-                cout << "Max(40)" << endl;
-                cout <<"Invalid input. Try again." << endl;
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                            continue;
-            }
-            else if(stats.availablePts <= 0)
-            {
-                cout << "No available attribute points to distibrute." << endl;
-                cout <<  "Finish creating or lower some attribute points..." << endl;
-            }
-            else if (a < placer)
-            {
-                pointChange = placer - a;
-                stats.availablePts += pointChange; 
-                stats.resistance = a;
-                break;
-            }
-            else if (a > placer)
-            {
-                pointChange = a - placer;
-                stats.availablePts -= pointChange;
-                stats.resistance = a;
-                break;
-            }
-        }
-            
-    }
-
-    void setIntelligence() override
-    {
-        
-        int a;
-        int placer = getIntelligence();
-        int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
-        int pointChange;
-        while(true)
-        {
-            cin >> a;
-            if (!cin || a > 30 || a < 0)
-            {
-                cout << "Max(30)" << endl;
-                cout <<"Invalid input. Try again." << endl;
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                            continue;
-            }
-            else if(stats.availablePts <= 0)
-            {
-                cout << "No available attribute points to distibrute." << endl;
-                cout <<  "Finish creating or lower some attribute points..." << endl;
-            }
-            else if (a < placer)
-            {
-                pointChange = placer - a;
-                stats.availablePts += pointChange; 
-                stats.intelligence = a;
-                break;
-            }
-            else if (a > placer)
-            {
-                pointChange = a - placer;
-                stats.availablePts -= pointChange;
-                stats.intelligence = a;
-                break;
-            }
-        }
-            
-    }
-
-    void setFaith() override
-    {
-        
-        int a;
-        int placer = getFaith();
-        int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
-        int pointChange;
-        while(true)
-        {
-            cin >> a;
-            if (!cin || a > 50 || a < 0)
-            {
-                cout << "Max(50)" << endl;
-                cout <<"Invalid input. Try again." << endl;
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                            continue;
-            }
-            else if(stats.availablePts <= 0)
-            {
-                cout << "No available attribute points to distibrute." << endl;
-                cout <<  "Finish creating or lower some attribute points..." << endl;
-            }
-            else if (a < placer)
-            {
-                pointChange = placer - a;
-                stats.availablePts += pointChange; 
-                stats.faith = a;
-                break;
-            }
-            else if (a > placer)
-            {
-                pointChange = a - placer;
-                stats.availablePts -= pointChange;
-                stats.faith = a;
-                break;
-            }
-        }
-            
-    }
-
-
-};
-
-class Fighter : public Character
-{
-    public: 
-    Fighter(string name, vector<string> skills) : Character(name, "Fighter", skills)
-    {
-        this -> name = name;
-        this -> charClass = "Fighter";
-        classSkills = {"Fell Sweep", "Anggry Charge", "Sword Slam"};
-        stats = {27, 10, 15, 23, 18, 9, 7};
-        //v,a,e,s,d,r,i,f
-    }
-
-    // void toString() override
-    // {
-    //     cout << "Name: " << name << ", Level: " << level << endl;
-    // }
-
-    string getCharacterClass() override
-    {
-        return "Fighter";
-    }
-
-
-    void setVitality() override
-    {
-        //This will be my format for all subclass setters for Stat attributes. placer is for the current value, pointChanhe is the
-        //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
-        //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
-        //All in a while loop for validation
-        int v;
-        int placer = getVitality();
-        int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
-        int pointChange;
-        while(true)
-        {
-            cin >> v;
-            if (!cin || v > 45 || v < 0)
-            {
-                cout << "Max(45)" << endl;
+                cout << "Max(17)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1402,9 +1046,9 @@ class Fighter : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 12 || a < 0)
+            if (!cin || a > 18 || a < 0)
             {
-                cout << "Max(12)" << endl;
+                cout << "Max(18)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1444,9 +1088,9 @@ class Fighter : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 25 || a < 0)
+            if (!cin || a > 32 || a < 0)
             {
-                cout << "Max(25)" << endl;
+                cout << "Max(32)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1486,9 +1130,9 @@ class Fighter : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 26 || a < 0)
+            if (!cin || a > 45 || a < 0)
             {
-                cout << "Max(26)" << endl;
+                cout << "Max(45)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1528,9 +1172,9 @@ class Fighter : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 40 || a < 0)
+            if (!cin || a > 12 || a < 0)
             {
-                cout << "Max(40)" << endl;
+                cout << "Max(12)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1570,9 +1214,9 @@ class Fighter : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 30 || a < 0)
+            if (!cin || a > 10 || a < 0)
             {
-                cout << "Max(30)" << endl;
+                cout << "Max(10)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1612,9 +1256,368 @@ class Fighter : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 50 || a < 0)
+            if (!cin || a > 11 || a < 0)
             {
-                cout << "Max(50)" << endl;
+                cout << "Max(11)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.faith = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.faith = a;
+                break;
+            }
+        }
+            
+    }
+
+
+};
+
+class Fighter : public Character
+{
+    //Fighter max stats: v30, a13, e18, 24s, 19r, 10i ,8f, d32
+    public: 
+    Fighter(string name, vector<string> skills) : Character(name, "Fighter", skills)
+    {
+        this -> name = name;
+        this -> charClass = "Fighter";
+        classSkills = {"Fell Sweep", "Anggry Charge", "Sword Slam"};
+        stats = {27, 10, 15, 23, 18, 9, 7};
+        //v,a,e,s,d,r,i,f
+    }
+
+  
+
+    string getCharacterClass() override
+    {
+        return "Fighter";
+    }
+
+
+    void setVitality() override
+    {
+
+        int v;
+        int placer = getVitality();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> v;
+            if (!cin || v > 30 || v < 0)
+            {
+                cout << "Max(30)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (v < placer)
+            {
+                pointChange = placer - v;
+                stats.availablePts += pointChange; 
+                stats.vitality = v;
+                break;
+            }
+            else if (v > placer)
+            {
+                pointChange = v - placer;
+                stats.availablePts -= pointChange;
+                stats.vitality = v;
+                break;
+            }
+            
+        }
+    }
+
+    void setAttunement() override
+    {
+        
+        int a;
+        int placer = getAttunement();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 13 || a < 0)
+            {
+                cout << "Max(13)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.attunement = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.attunement = a;
+                break;
+            }
+        }
+            
+    }
+        void setStrength() override
+    {
+
+        int a;
+        int placer = getStrength();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 24 || a < 0)
+            {
+                cout << "Max(24)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.strength = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.strength = a;
+                break;
+            }
+        }
+            
+    } 
+
+            void setEndurance() override
+    {
+        
+        int a;
+        int placer = getEndurance();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 18 || a < 0)
+            {
+                cout << "Max(18)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.endurance = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.endurance = a;
+                break;
+            }
+        }
+            
+    }
+
+    void setDexterity() override
+    {
+        
+        int a;
+        int placer = getDexterity();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 32 || a < 0)
+            {
+                cout << "Max(32)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.dexterity = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.dexterity = a;
+                break;
+            }
+        }
+            
+    }
+
+    void setResistance() override
+    {
+        
+        int a;
+        int placer = getResistance();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 19 || a < 0)
+            {
+                cout << "Max(19)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.resistance = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.resistance = a;
+                break;
+            }
+        }
+            
+    }
+
+    void setIntelligence() override
+    {
+        
+        int a;
+        int placer = getIntelligence();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 10 || a < 0)
+            {
+                cout << "Max(10)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.intelligence = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.intelligence = a;
+                break;
+            }
+        }
+            
+    }
+
+    void setFaith() override
+    {
+        
+        int a;
+        int placer = getFaith();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 8 || a < 0)
+            {
+                cout << "Max(8)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1645,22 +1648,20 @@ class Fighter : public Character
 
     
 };
+
 //v,a,e,s,d,r,i,f
 class Barbarian : public Character
 {
+    //Barbarian max stats: v52, a5, e15, s35, d6, r12, i3, f3 
     public: 
     Barbarian(string name, vector<string> skills) : Character(name, "Barbarian", skills)
     {
         this -> name = name;
         this -> charClass = "Barbarian";
         classSkills = {"Brolic Blast", "MeatHead Swing", "Hunky Hateness"};
-        stats = {30, 3, 13, 26, 8, 12, 2, 1};
+        stats = {30, 3, 13, 26, 8, 6, 2, 1};
     }
 
-    // void toString() override
-    // {
-    //     cout << "Name: " << name << ", Level: " << level << endl;
-    // }
 
     string getCharacterClass() override
     {
@@ -1722,9 +1723,9 @@ class Barbarian : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 40 || a < 0)
+            if (!cin || a > 5 || a < 0)
             {
-                cout << "Max(40)" << endl;
+                cout << "Max(5)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1763,9 +1764,9 @@ class Barbarian : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 12 || a < 0)
+            if (!cin || a > 35 || a < 0)
             {
-                cout << "Max(12)" << endl;
+                cout << "Max(35)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1805,9 +1806,9 @@ class Barbarian : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 25 || a < 0)
+            if (!cin || a > 15 || a < 0)
             {
-                cout << "Max(25)" << endl;
+                cout << "Max(15)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1847,9 +1848,9 @@ class Barbarian : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 18 || a < 0)
+            if (!cin || a > 6 || a < 0)
             {
-                cout << "Max(18)" << endl;
+                cout << "Max(6)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1889,9 +1890,9 @@ class Barbarian : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 25 || a < 0)
+            if (!cin || a > 12 || a < 0)
             {
-                cout << "Max(25)" << endl;
+                cout << "Max(12)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1931,9 +1932,9 @@ class Barbarian : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 30 || a < 0)
+            if (!cin || a > 3 || a < 0)
             {
-                cout << "Max(30)" << endl;
+                cout << "Max(3)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1973,9 +1974,9 @@ class Barbarian : public Character
         while(true)
         {
             cin >> a;
-            if (!cin || a > 8 || a < 0)
+            if (!cin || a > 3 || a < 0)
             {
-                cout << "Max(8)" << endl;
+                cout << "Max(3)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -2248,12 +2249,16 @@ int main()
                                 break;
 
                         }
+
                         cout << "-------------------------------" << endl;
                         characterPtr->printStats();
                     }
+
                     cout << "--------------------------------\n";
                     int skillChoice;
+
                     const auto& classSkills = characterPtr->getClassSkills();
+                    
                     cout << "Add from the selection of " << characterPtr->getCharacterClass() << " skills (Only 2!): " << endl;
                     characterPtr->getClassSkills();
                     
