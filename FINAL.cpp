@@ -140,6 +140,32 @@ class Character
     {
         return stats.attunement;
     }
+    int getStrength()
+    {
+        return stats.strength;
+    }
+    int getFaith()
+    {
+        return stats.faith;
+    }
+    int getIntelligence()
+    {
+        return stats.intelligence;
+    }
+    int getDexterity()
+    {
+        return stats.dexterity;
+    }
+    int getResistance()
+    {
+        return stats.resistance;
+    }
+    int getEndurance()
+    {
+        return stats.endurance;
+    }
+
+
 
     int getAvailablePts()
     {
@@ -231,17 +257,17 @@ class Pyromancer : public Character
         //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
         //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
         //All in a while loop for validation
-        int v;
+        int a;
         int placer = getAttunement();
         int points = getAvailablePts();
         cout << "Current:" << placer<<endl;
         int pointChange;
         while(true)
         {
-            cin >> v;
-            if (!cin || v > 15 || v < 0)
+            cin >> a;
+            if (!cin || a > 40 || a < 0)
             {
-                cout << "Max(15)" << endl;
+                cout << "Max(40)" << endl;
                 cout <<"Invalid input. Try again." << endl;
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -252,27 +278,290 @@ class Pyromancer : public Character
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
             }
-            else if (v < placer)
+            else if (a < placer)
             {
-                pointChange = placer - v;
+                pointChange = placer - a;
                 stats.availablePts += pointChange; 
-                stats.vitality = v;
+                stats.attunement = a;
                 break;
             }
-            else if (v > placer)
+            else if (a > placer)
             {
-                pointChange = v - placer;
+                pointChange = a - placer;
                 stats.availablePts -= pointChange;
-                stats.vitality = v;
+                stats.attunement = a;
                 break;
             }
         }
             
     }
-        
+        void setStrength() override
+    {
 
+        int a;
+        int placer = getStrength();
+        int points = getAvailablePts();
+        cout << "Current:" << placer<<endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 12 || a < 0)
+            {
+                cout << "Max(12)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.strength = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.strength = a;
+                break;
+            }
+        }
+            
+    } 
+
+            void setEndurance() override
+    {
+        //This will be my format for all subclass setters for Stat attributes. placer is for the current value, pointChanhe is the
+        //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
+        //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
+        //All in a while loop for validation
+        int a;
+        int placer = getEndurance();
+        int points = getAvailablePts();
+        cout << "Current:" << placer<<endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 25 || a < 0)
+            {
+                cout << "Max(25)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.endurance = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.endurance = a;
+                break;
+            }
+        }
+            
+    }
+
+    void setDexterity() override
+    {
+        //This will be my format for all subclass setters for Stat attributes. placer is for the current value, pointChanhe is the
+        //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
+        //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
+        //All in a while loop for validation
+        int a;
+        int placer = getDexterity();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 26 || a < 0)
+            {
+                cout << "Max(26)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.dexterity = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.dexterity = a;
+                break;
+            }
+        }
+            
+    }
+
+    void setResistance() override
+    {
+        //This will be my format for all subclass setters for Stat attributes. placer is for the current value, pointChanhe is the
+        //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
+        //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
+        //All in a while loop for validation
+        int a;
+        int placer = getResistance();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 40 || a < 0)
+            {
+                cout << "Max(40)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.resistance = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.resistance = a;
+                break;
+            }
+        }
+            
+    }
+
+    void setIntelligence() override
+    {
+        //This will be my format for all subclass setters for Stat attributes. placer is for the current value, pointChanhe is the
+        //difference between current and old value. Some classes can not have stats over a certain level like pyromancer
+        //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
+        //All in a while loop for validation
+        int a;
+        int placer = getIntelligence();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 30 || a < 0)
+            {
+                cout << "Max(30)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.intelligence = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.intelligence = a;
+                break;
+            }
+        }
+            
+    }
+
+    void setFaith() override
+    {
         
-}
+        int a;
+        int placer = getFaith();
+        int points = getAvailablePts();
+        cout << "What would you like to change the stat too?" << endl;
+        int pointChange;
+        while(true)
+        {
+            cin >> a;
+            if (!cin || a > 50 || a < 0)
+            {
+                cout << "Max(50)" << endl;
+                cout <<"Invalid input. Try again." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            continue;
+            }
+            else if(stats.availablePts <= 0)
+            {
+                cout << "No available attribute points to distibrute." << endl;
+                cout <<  "Finish creating or lower some attribute points..." << endl;
+            }
+            else if (a < placer)
+            {
+                pointChange = placer - a;
+                stats.availablePts += pointChange; 
+                stats.faith = a;
+                break;
+            }
+            else if (a > placer)
+            {
+                pointChange = a - placer;
+                stats.availablePts -= pointChange;
+                stats.faith = a;
+                break;
+            }
+        }
+            
+    }
+
+    
+        
+};
     //Originally was going to use this for getting class skills but decided to just make them hardcoded in constructor body subclass
     // vector<string> getClassSkills() override
     // {
