@@ -111,35 +111,15 @@ class Character
 
     //setters
     virtual void setVitality() = 0;
+    virtual void setStrength() = 0;
+    virtual void setAttunement() = 0;
+    virtual void setEndurance() = 0;
+    virtual void setDexterity() = 0;
+    virtual void setResistance() = 0;
+    virtual void setIntelligence() = 0;
+    virtual void setFaith() = 0;
     
-    void setStrength(int s)
-    {
-        stats.strength = s;
-    }
-    void setAttunement(int a)
-    {
-        stats.attunement = a;
-    }
-    void setEndurance(int e)
-    {
-        stats.endurance = e;
-    }
-    void setDexterity(int d)
-    {
-        stats.dexterity = d;
-    }
-    void setResistance(int r)
-    {
-        stats.resistance = r;
-    }
-    void setIntelligence(int i)
-    {
-        stats.intelligence = i;
-    }
-    void setFaith(int f)
-    {
-        stats.faith = f;
-    }
+    
 
 
     //Display
@@ -155,6 +135,10 @@ class Character
     int getVitality()
     {
         return stats.vitality;
+    }
+    int getAttunement()
+    {
+        return stats.attunement;
     }
 
     int getAvailablePts()
@@ -238,6 +222,7 @@ class Pyromancer : public Character
                 break;
             }
             
+        }
     }
 
     void setAttunement() override
@@ -247,7 +232,7 @@ class Pyromancer : public Character
         //having vitality cappped at 15. PointChange is used to modify the available points left for character customization
         //All in a while loop for validation
         int v;
-        int placer = getVitality();
+        int placer = getAttunement();
         int points = getAvailablePts();
         cout << "Current:" << placer<<endl;
         int pointChange;
@@ -281,12 +266,13 @@ class Pyromancer : public Character
                 stats.vitality = v;
                 break;
             }
+        }
             
     }
         
 
         
-    }
+}
     //Originally was going to use this for getting class skills but decided to just make them hardcoded in constructor body subclass
     // vector<string> getClassSkills() override
     // {
@@ -296,7 +282,7 @@ class Pyromancer : public Character
 
     
 
-};
+
 
 class Priest : public Character
 {
