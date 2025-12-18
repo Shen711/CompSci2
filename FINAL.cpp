@@ -2049,7 +2049,7 @@ int main()
             else if (choice == 3)
             {
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "Options menu is currently unavailable. Returning to main menu." << endl;
+                cout << "Options menu is currently unavailable. Returning to main menu...\n" << endl;
                 break;
                 
             }
@@ -2096,7 +2096,7 @@ int main()
                     else if (menu2Choice > savedGames && menu2Choice < 4)
                     {
                         cout << "You have an open save slot " << menu2Choice << endl;
-                        cout << "Create one using the main menu!" << endl;
+                        cout << "Create one using the main menu!\n" << endl;
                         //then directs to main menu
                         break;
                     }
@@ -2238,8 +2238,10 @@ int main()
                                 break;
                             case 6:
                                 characterPtr->setResistance();
+                                break;
                             case 7:
                                 characterPtr->setIntelligence();
+                                break;
                             case 8:
                                 characterPtr->setFaith();
                             default:
