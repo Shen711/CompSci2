@@ -224,7 +224,7 @@ class Pyromancer : public Character
         int v;
         int placer = getVitality();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change vitality to?" << endl;
         int pointChange;
         while(true)
         {
@@ -241,6 +241,7 @@ class Pyromancer : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             //decreasing a stat
             else if (v < placer)
@@ -274,7 +275,7 @@ class Pyromancer : public Character
         int a;
         int placer = getAttunement();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change attunement to?" << endl;
         int pointChange;
         while(true)
         {
@@ -291,6 +292,7 @@ class Pyromancer : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -320,7 +322,7 @@ class Pyromancer : public Character
         int a;
         int placer = getStrength();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change strength to?" << endl;
         int pointChange;
         while(true)
         {
@@ -337,6 +339,7 @@ class Pyromancer : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -367,7 +370,7 @@ class Pyromancer : public Character
         int a;
         int placer = getEndurance();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change endurance to?" << endl;
         int pointChange;
         while(true)
         {
@@ -384,6 +387,7 @@ class Pyromancer : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -414,7 +418,7 @@ class Pyromancer : public Character
         int a;
         int placer = getDexterity();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change dexterity to?" << endl;
         int pointChange;
         while(true)
         {
@@ -431,6 +435,7 @@ class Pyromancer : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -461,7 +466,7 @@ class Pyromancer : public Character
         int a;
         int placer = getResistance();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change resistance to?" << endl;
         int pointChange;
         while(true)
         {
@@ -478,6 +483,7 @@ class Pyromancer : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -508,7 +514,7 @@ class Pyromancer : public Character
         int a;
         int placer = getIntelligence();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change intelligence to?" << endl;
         int pointChange;
         while(true)
         {
@@ -525,6 +531,7 @@ class Pyromancer : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -555,7 +562,7 @@ class Pyromancer : public Character
         int a;
         int placer = getFaith();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change faith to" << endl;
         int pointChange;
         while(true)
         {
@@ -572,6 +579,7 @@ class Pyromancer : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -641,7 +649,7 @@ class Priest : public Character
         int v;
         int placer = getVitality();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change vitality to?" << endl;
         int pointChange;
         while(true)
         {
@@ -658,6 +666,7 @@ class Priest : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (v < placer)
             {
@@ -688,7 +697,7 @@ class Priest : public Character
         int a;
         int placer = getAttunement();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change attunement to?" << endl;
         int pointChange;
         while(true)
         {
@@ -705,6 +714,7 @@ class Priest : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -734,7 +744,7 @@ class Priest : public Character
         int a;
         int placer = getStrength();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change strength to?" << endl;
         int pointChange;
         while(true)
         {
@@ -751,6 +761,7 @@ class Priest : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -781,7 +792,7 @@ class Priest : public Character
         int a;
         int placer = getEndurance();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change endurance to?" << endl;
         int pointChange;
         while(true)
         {
@@ -798,6 +809,7 @@ class Priest : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -828,7 +840,7 @@ class Priest : public Character
         int a;
         int placer = getDexterity();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change dexterity to?" << endl;
         int pointChange;
         while(true)
         {
@@ -845,6 +857,7 @@ class Priest : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -875,7 +888,7 @@ class Priest : public Character
         int a;
         int placer = getResistance();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change resistance to?" << endl;
         int pointChange;
         while(true)
         {
@@ -892,6 +905,7 @@ class Priest : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -922,7 +936,7 @@ class Priest : public Character
         int a;
         int placer = getIntelligence();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat to?" << endl;
+        cout << "What would you like to change intelligence to?" << endl;
         int pointChange;
         while(true)
         {
@@ -939,6 +953,7 @@ class Priest : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -969,7 +984,7 @@ class Priest : public Character
         int a;
         int placer = getFaith();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change faith to?" << endl;
         int pointChange;
         while(true)
         {
@@ -986,6 +1001,7 @@ class Priest : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1041,7 +1057,7 @@ class Thief : public Character
         int v;
         int placer = getVitality();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change vitality to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1058,6 +1074,7 @@ class Thief : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (v < placer)
             {
@@ -1088,7 +1105,7 @@ class Thief : public Character
         int a;
         int placer = getAttunement();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change attunement to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1105,6 +1122,7 @@ class Thief : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1134,7 +1152,7 @@ class Thief : public Character
         int a;
         int placer = getStrength();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change strength to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1151,6 +1169,7 @@ class Thief : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1181,7 +1200,7 @@ class Thief : public Character
         int a;
         int placer = getEndurance();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change endurance to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1198,6 +1217,7 @@ class Thief : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1228,7 +1248,7 @@ class Thief : public Character
         int a;
         int placer = getDexterity();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change the dexterity to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1245,6 +1265,7 @@ class Thief : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1275,7 +1296,7 @@ class Thief : public Character
         int a;
         int placer = getResistance();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change resistance to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1292,6 +1313,7 @@ class Thief : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1322,7 +1344,7 @@ class Thief : public Character
         int a;
         int placer = getIntelligence();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change the intelligence to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1339,6 +1361,7 @@ class Thief : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1369,7 +1392,7 @@ class Thief : public Character
         int a;
         int placer = getFaith();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change faith to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1386,6 +1409,7 @@ class Thief : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1421,8 +1445,8 @@ class Fighter : public Character
     {
         this -> name = name;
         this -> charClass = "Fighter";
-        classSkills = {"Fell Sweep", "Anggry Charge", "Sword Slam"};
-        stats = {27, 10, 15, 23, 18, 9, 7};
+        classSkills = {"Fell Sweep", "Angry Charge", "Sword Slam"};
+        stats = {27, 10, 15, 23, 18, 9, 7, 5};
         //v,a,e,s,d,r,i,f
     }
 
@@ -1457,6 +1481,7 @@ class Fighter : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (v < placer)
             {
@@ -1504,6 +1529,7 @@ class Fighter : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1550,6 +1576,7 @@ class Fighter : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1597,6 +1624,7 @@ class Fighter : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1644,6 +1672,7 @@ class Fighter : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1691,6 +1720,7 @@ class Fighter : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1721,7 +1751,7 @@ class Fighter : public Character
         int a;
         int placer = getIntelligence();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change the stat to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1738,6 +1768,7 @@ class Fighter : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1768,7 +1799,7 @@ class Fighter : public Character
         int a;
         int placer = getFaith();
         int points = getAvailablePts();
-        cout << "What would you like to change the stat too?" << endl;
+        cout << "What would you like to change the stat to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1785,6 +1816,7 @@ class Fighter : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1839,7 +1871,7 @@ class Barbarian : public Character
         int v;
         int placer = getVitality();
         int points = getAvailablePts();
-        cout << "What would you like to change vitality too?" << endl;
+        cout << "What would you like to change vitality to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1856,6 +1888,7 @@ class Barbarian : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (v < placer)
             {
@@ -1886,7 +1919,7 @@ class Barbarian : public Character
         int a;
         int placer = getAttunement();
         int points = getAvailablePts();
-        cout << "What would you like to change attunement too?" << endl;
+        cout << "What would you like to change attunement to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1903,6 +1936,7 @@ class Barbarian : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1932,7 +1966,7 @@ class Barbarian : public Character
         int a;
         int placer = getStrength();
         int points = getAvailablePts();
-        cout << "What would you like to change strength too?" << endl;
+        cout << "What would you like to change strength to?" << endl;
         int pointChange;
         while(true)
         {
@@ -1949,6 +1983,7 @@ class Barbarian : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -1996,6 +2031,7 @@ class Barbarian : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -2043,6 +2079,7 @@ class Barbarian : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -2073,7 +2110,7 @@ class Barbarian : public Character
         int a;
         int placer = getResistance();
         int points = getAvailablePts();
-        cout << "What would you like to change resistance too?" << endl;
+        cout << "What would you like to change resistance to?" << endl;
         int pointChange;
         while(true)
         {
@@ -2090,6 +2127,7 @@ class Barbarian : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -2120,7 +2158,7 @@ class Barbarian : public Character
         int a;
         int placer = getIntelligence();
         int points = getAvailablePts();
-        cout << "What would you like to changeintelligence to?" << endl;
+        cout << "What would you like to change intelligence to?" << endl;
         int pointChange;
         while(true)
         {
@@ -2137,6 +2175,7 @@ class Barbarian : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
@@ -2184,6 +2223,7 @@ class Barbarian : public Character
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
+                break;
             }
             else if (a < placer)
             {
