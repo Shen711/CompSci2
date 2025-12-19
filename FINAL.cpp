@@ -237,7 +237,7 @@ class Pyromancer : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0 || (placer))
+            else if(stats.availablePts <= 0 && v > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -288,7 +288,7 @@ class Pyromancer : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -335,7 +335,7 @@ class Pyromancer : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -383,7 +383,7 @@ class Pyromancer : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -431,7 +431,7 @@ class Pyromancer : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -479,7 +479,7 @@ class Pyromancer : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -527,7 +527,7 @@ class Pyromancer : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -575,7 +575,7 @@ class Pyromancer : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -662,7 +662,7 @@ class Priest : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && v > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -710,7 +710,7 @@ class Priest : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -757,7 +757,7 @@ class Priest : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -805,7 +805,7 @@ class Priest : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -853,7 +853,7 @@ class Priest : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -901,7 +901,7 @@ class Priest : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -949,7 +949,7 @@ class Priest : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -997,7 +997,7 @@ class Priest : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1070,7 +1070,7 @@ class Thief : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && v > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1118,7 +1118,7 @@ class Thief : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1165,7 +1165,7 @@ class Thief : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1213,7 +1213,7 @@ class Thief : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1261,7 +1261,7 @@ class Thief : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1309,7 +1309,7 @@ class Thief : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1357,7 +1357,7 @@ class Thief : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1405,7 +1405,7 @@ class Thief : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1477,7 +1477,7 @@ class Fighter : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && v > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1525,7 +1525,7 @@ class Fighter : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1572,7 +1572,7 @@ class Fighter : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1620,7 +1620,7 @@ class Fighter : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1668,7 +1668,7 @@ class Fighter : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1716,7 +1716,7 @@ class Fighter : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1764,7 +1764,7 @@ class Fighter : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1812,7 +1812,7 @@ class Fighter : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1884,7 +1884,7 @@ class Barbarian : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && v > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1932,7 +1932,7 @@ class Barbarian : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -1979,7 +1979,7 @@ class Barbarian : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -2027,7 +2027,7 @@ class Barbarian : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -2075,7 +2075,7 @@ class Barbarian : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -2123,7 +2123,7 @@ class Barbarian : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -2171,7 +2171,7 @@ class Barbarian : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
@@ -2219,7 +2219,7 @@ class Barbarian : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 && a > placer)
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
