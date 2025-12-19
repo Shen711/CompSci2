@@ -243,7 +243,7 @@ class Pyromancer : public Character
                 cout <<  "Finish creating or lower some attribute points..." << endl;
                 break;
             }
-            //decreasing a stat
+            //decreasing a stat adds points to pool
             else if (v < placer)
             {
                 pointChange = placer - v;
@@ -2255,10 +2255,12 @@ class Barbarian : public Character
 //Main program
 int main()
 {
+    //vector to hold characters
     vector<Character*> Characters;
     string name;    
     vector<string> skills;
     
+    //allocate memory for the soon to be character
     Character* characterPtr = nullptr;
     //Menu loop
     while(true)
@@ -2293,7 +2295,7 @@ int main()
             else if (choice == 3)
             {
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "Options menu is currently unavailable. Returning to main menu...\n" << endl;
+                cout << "Options menu is unmodifiable. Returning to main menu...\n" << endl;
                 break;
                 
             }
@@ -2554,19 +2556,11 @@ int main()
                     cout << "Character Successfully Created..." << endl;
                     cout << "Exiting to main menu....." << endl;
                     
-                    
-
-                    
-
                     cout << "\n---------------------------------\n";
 
-                    break;
-
-                    
-                    
+                    break;  
                 }
             }
-    
         }
     }
     return 0;
