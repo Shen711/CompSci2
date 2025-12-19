@@ -237,11 +237,12 @@ class Pyromancer : public Character
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             continue;
             }
-            else if(stats.availablePts <= 0)
+            else if(stats.availablePts <= 0 || (placer))
             {
                 cout << "No available attribute points to distibrute." << endl;
                 cout <<  "Finish creating or lower some attribute points..." << endl;
             }
+            //decreasing a stat
             else if (v < placer)
             {
                 pointChange = placer - v;
@@ -249,11 +250,18 @@ class Pyromancer : public Character
                 stats.vitality = v;
                 break;
             }
+            //validation for the increase based on how many points they have
             else if (v > placer)
             {
                 pointChange = v - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.vitality = v;
+
                 break;
             }
             
@@ -294,6 +302,11 @@ class Pyromancer : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.attunement = a;
                 break;
@@ -335,6 +348,11 @@ class Pyromancer : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.strength = a;
                 break;
@@ -377,6 +395,11 @@ class Pyromancer : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.endurance = a;
                 break;
@@ -419,6 +442,11 @@ class Pyromancer : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.dexterity = a;
                 break;
@@ -461,6 +489,11 @@ class Pyromancer : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.resistance = a;
                 break;
@@ -503,6 +536,11 @@ class Pyromancer : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.intelligence = a;
                 break;
@@ -545,6 +583,11 @@ class Pyromancer : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.faith = a;
                 break;
@@ -626,6 +669,11 @@ class Priest : public Character
             else if (v > placer)
             {
                 pointChange = v - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.vitality = v;
                 break;
@@ -668,6 +716,11 @@ class Priest : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.attunement = a;
                 break;
@@ -709,6 +762,11 @@ class Priest : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.strength = a;
                 break;
@@ -751,6 +809,11 @@ class Priest : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.endurance = a;
                 break;
@@ -793,6 +856,11 @@ class Priest : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.dexterity = a;
                 break;
@@ -835,6 +903,11 @@ class Priest : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.resistance = a;
                 break;
@@ -877,6 +950,11 @@ class Priest : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.intelligence = a;
                 break;
@@ -919,6 +997,11 @@ class Priest : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.faith = a;
                 break;
@@ -986,6 +1069,11 @@ class Thief : public Character
             else if (v > placer)
             {
                 pointChange = v - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.vitality = v;
                 break;
@@ -1028,6 +1116,11 @@ class Thief : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.attunement = a;
                 break;
@@ -1069,6 +1162,11 @@ class Thief : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.strength = a;
                 break;
@@ -1111,6 +1209,11 @@ class Thief : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.endurance = a;
                 break;
@@ -1153,6 +1256,11 @@ class Thief : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.dexterity = a;
                 break;
@@ -1195,6 +1303,11 @@ class Thief : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.resistance = a;
                 break;
@@ -1237,6 +1350,11 @@ class Thief : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.intelligence = a;
                 break;
@@ -1279,6 +1397,11 @@ class Thief : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.faith = a;
                 break;
@@ -1345,6 +1468,11 @@ class Fighter : public Character
             else if (v > placer)
             {
                 pointChange = v - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.vitality = v;
                 break;
@@ -1387,6 +1515,11 @@ class Fighter : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.attunement = a;
                 break;
@@ -1428,6 +1561,11 @@ class Fighter : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.strength = a;
                 break;
@@ -1470,6 +1608,11 @@ class Fighter : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.endurance = a;
                 break;
@@ -1512,6 +1655,11 @@ class Fighter : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.dexterity = a;
                 break;
@@ -1554,6 +1702,11 @@ class Fighter : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.resistance = a;
                 break;
@@ -1596,6 +1749,11 @@ class Fighter : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.intelligence = a;
                 break;
@@ -1638,6 +1796,11 @@ class Fighter : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.faith = a;
                 break;
@@ -1704,6 +1867,11 @@ class Barbarian : public Character
             else if (v > placer)
             {
                 pointChange = v - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.vitality = v;
                 break;
@@ -1746,6 +1914,11 @@ class Barbarian : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.attunement = a;
                 break;
@@ -1787,6 +1960,11 @@ class Barbarian : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.strength = a;
                 break;
@@ -1829,6 +2007,11 @@ class Barbarian : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.endurance = a;
                 break;
@@ -1871,6 +2054,11 @@ class Barbarian : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.dexterity = a;
                 break;
@@ -1913,6 +2101,11 @@ class Barbarian : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.resistance = a;
                 break;
@@ -1955,6 +2148,11 @@ class Barbarian : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.intelligence = a;
                 break;
@@ -1997,6 +2195,11 @@ class Barbarian : public Character
             else if (a > placer)
             {
                 pointChange = a - placer;
+                if (pointChange > stats.availablePts)
+                {
+                    cout << "You do not have enough points to increase by " << pointChange << "!" << endl;
+                    continue;
+                }
                 stats.availablePts -= pointChange;
                 stats.faith = a;
                 break;
